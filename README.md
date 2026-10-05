@@ -3,7 +3,9 @@
 ### Gemensamma områden
 
 Startsidan
+
 Figma design
+
 Sätta upp css variabler
 
 
@@ -13,13 +15,18 @@ Tema: Upplevelser
 
 #### Simon
   Spel
+  
     VR
+    
     PC Café
+    
     Arkad
+    
 
 #### Sam
   
   
 #### Sandra
+
   Skönhet
     
