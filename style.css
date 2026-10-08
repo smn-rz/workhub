@@ -39,11 +39,17 @@
 
 body {
     font-family: "Inter", sans-serif;
+    font-size: var(--body-text-md);
+}
+
+input, button, textarea, select {
+    font: inherit;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--brand-1100);
     font-weight: 800;
+    line-height: 1.3;
 }
 
 h1 { font-size: 3.5rem; }
@@ -61,7 +67,8 @@ h5 { font-size: 1.5rem; }
 h6 { font-size: 1rem; }
 
 p {
+    color: var(--brand-1100);
     font-size: var(--body-text-md);
     font-weight: 400;
-    line-height: 160%;
+    line-height: 1.5;
 }
