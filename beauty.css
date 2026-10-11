@@ -1,0 +1,106 @@
+
+#beauty-page {
+    padding: 2rem;
+
+    /* Introduktion */
+    .beauty-intro {
+        font-size: var(--body-text-lg);
+        margin: 15px 0 25px;
+    }
+h1, h2, h3 {
+    color:  #665548;
+}
+    /* Välkomstbild */
+    .beauty-hero-img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+    }
+
+    /* Behandlingarnas layout */
+    #treatment-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    /* Behandlingskort */
+    .treatment-card {
+        min-width: 0;
+        background-color: var(--brand-50);
+        border-radius: 12px;
+        overflow: hidden;
+        padding-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .treatment-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .treatment-card h3 {
+        font-size: var(--body-text-lead);
+        font-weight: 600;
+        margin: 0;
+        padding: 15px;
+    }
+
+    .treatment-card p {
+        margin: 0 15px 12px;
+        line-height: 1.6;
+    }
+
+    /* Behandlingstid */
+    .treatment-card .treatment-duration {
+        font-size: var(--body-text-sm);
+        color: var(--brand-900);
+        margin-top: 15px;
+    }
+
+    /* Pris */
+    .treatment-card .treatment-price {
+        font-size: var(--body-text-xl);
+        font-weight: 700;
+        color: var(--brand-900);
+    }
+
+    .treatment-price span {
+        font-size: var(--body-text-sm);
+        font-weight: 400;
+    }
+
+    /* Knappar */
+    .beauty-btn {
+        display: inline-block;
+        background-color: #665548;
+        color: var(--white);
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .beauty-btn:hover {
+        background-color: #4a3c32;
+    }
+
+    /* Mobilanpassning */
+    @media (max-width: 768px) {
+        padding: 1rem;
+
+        #treatment-list {
+            grid-template-columns: 1fr;
+        }
+
+        .beauty-hero-img {
+            height: 250px;
+        }
+    }
+}
