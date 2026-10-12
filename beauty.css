@@ -7,9 +7,12 @@
         font-size: var(--body-text-lg);
         margin: 15px 0 25px;
     }
-h1, h2, h3 {
-    color:  #665548;
-}
+
+    /* Rubriker */
+    h1, h2, h3 {
+        color: #665548;
+    }
+
     /* Välkomstbild */
     .beauty-hero-img {
         width: 100%;
@@ -55,7 +58,7 @@ h1, h2, h3 {
         line-height: 1.6;
     }
 
-    /* Behandlingstid */
+    
     .treatment-card .treatment-duration {
         font-size: var(--body-text-sm);
         color: var(--brand-900);
@@ -91,6 +94,46 @@ h1, h2, h3 {
         background-color: #4a3c32;
     }
 
+   /* Bokningskort */
+.booking-section {
+    width: 100%;
+    
+    margin: 30px auto;
+    padding: 20px;
+    background-color: var(--brand-50);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+    /* Rubrik för bokning */
+   .booking-section h2 {
+    font-size: var(--body-text-xl);
+    margin-bottom: 15px;
+}
+
+    /* Vald behandling */
+    #selected-treatment {
+        margin-bottom: 20px;
+        white-space: pre-line;
+    }
+
+    /* Etikett för antal */
+    .booking-section label {
+        display: block;
+        font-size: var(--body-text-md);
+        margin-bottom: 10px;
+    }
+
+    /* Rullgardinsmeny */
+    #quantity {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--brand-200);
+        border-radius: 8px;
+        background-color: var(--white);
+        color: var(--brand-1100);
+    }
+
     /* Mobilanpassning */
     @media (max-width: 768px) {
         padding: 1rem;
@@ -101,6 +144,10 @@ h1, h2, h3 {
 
         .beauty-hero-img {
             height: 250px;
+        }
+
+        .booking-section {
+            padding: 20px;
         }
     }
 }
