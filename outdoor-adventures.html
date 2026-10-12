@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="outdoor-adventures.css">
+    <title>Friluftsäventyr</title>
+</head>
+<body>
+    <!-- Header/Nav -->
+
+    <main style="margin: 20px 12px;">
+        <img src="https://mountainbikeskolan.se/wp-content/uploads/2024/11/DSC_3659.jpg" alt="Flera personer som cyklar med mountainbikes i skogen." style="max-width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-radius: 24px;">
+
+        <h1>Friluftsäventyr</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel voluptatibus dolore aliquid tenetur alias.</p>
+        
+        <form action="" method="">
+            <p style="font-size: var(--body-text-lead); font-weight: 700;">Välj erbjudande</p>
+            
+            <fieldset class="offers" style="display: flex; flex-direction: column; gap: 16px;">
+                <legend>Välj erbjudande</legend>
+
+                <div class="offer" style="display: flex; gap: 16px;">
+                    <input type="radio" name="offer" id="offer1" value="Kanottur">
+                    <div style="display: flex; align-items: center; flex: 1; justify-content: space-between;">
+                        <div>
+                            <label for="offer1">Kanottur</label>
+                            <p>Kort beskrivning...</p>
+                        </div>
+
+                        <p>200 kr/enhet</p>
+                    </div>
+                </div>
+
+                <div class="offer">
+                    <input type="radio" name="offer" id="offer2" value="Klättring">
+                    <label for="offer2">Klättring</label>
+                </div>
+
+                <div class="offer">
+                    <input type="radio" name="offer" id="offer3" value="Mountainbiketur">
+                    <label for="offer3">Mountainbiketur</label>
+                </div>
+            </fieldset>
+            
+            <div>
+                <label for="amount">Antal enhet (1-5) *</label>
+                <div>
+                    <button type="button">-</button>
+                    <input type="number" name="amount" id="amount" value="1">
+                    <button type="button">+</button>
+                </div>
+            </div>
+
+            <div>
+                <p>Totalpris</p>
+                <p style="font-size: var(--body-text-lead); font-weight: 900;">200 kr</p>
+            </div>
+
+            <p style="font-size: var(--body-text-lead); font-weight: 700;">Dina uppgifter</p>
+
+            <fieldset>
+                <legend>Dina uppgifter</legend>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="name">Namn *</label>
+                    <input type="text" name="name" id="name">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="email">E-postadress *</label>
+                    <input type="email" name="email" id="email">
+                </div>
+            </fieldset>
+
+            <div>
+                <button type="submit">Boka</button>
+                <button type="reset">Börja om / Återställ</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
