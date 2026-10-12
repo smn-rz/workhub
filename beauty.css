@@ -1,16 +1,18 @@
 
 #beauty-page {
     padding: 2rem;
-
+   
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
     /* Introduktion */
     .beauty-intro {
         font-size: var(--body-text-lg);
-        margin: 15px 0 25px;
-    }
-
-    /* Rubriker */
-    h1, h2, h3 {
-        color: #665548;
+        margin-top: 25px;
+        line-height: 1.6;
+        text-align: center;
+        
     }
 
     /* Välkomstbild */
@@ -22,21 +24,67 @@
         display: block;
     }
 
-    /* Behandlingarnas layout */
+    /* Knappar */
+    .beauty-btn {
+        display: inline-block;
+        background-color: var(--brand-primary);
+        color: var(--white);
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    /* Knappen under introduktionen */
+.beauty-intro + .beauty-btn {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+    .beauty-btn:hover {
+        background-color: var(--brand-600);
+    }
+
+    .beauty-btn:focus-visible {
+        outline: 3px solid var(--brand-900);
+        outline-offset: 3px;
+    }
+
+    /* Behandlingar */
+    #treatments {
+        margin-top: 50px;
+    }
+
+    #treatments h2 {
+        margin-bottom: 25px;
+        
+    }
+
     #treatment-list {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
+        gap: 24px;
     }
 
     /* Behandlingskort */
     .treatment-card {
         min-width: 0;
+        display: flex;
+        flex-direction: column;
         background-color: var(--brand-50);
+        border: 1px solid var(--brand-200);
         border-radius: 12px;
         overflow: hidden;
-        padding-bottom: 20px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .treatment-card:hover {
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
     }
 
     .treatment-card img {
@@ -50,19 +98,17 @@
         font-size: var(--body-text-lead);
         font-weight: 600;
         margin: 0;
-        padding: 15px;
+        padding: 20px 20px 10px;
     }
 
     .treatment-card p {
-        margin: 0 15px 12px;
+        margin: 0 20px 15px;
         line-height: 1.6;
     }
 
-    
-    .treatment-card .treatment-duration {
+    .treatment-duration {
         font-size: var(--body-text-sm);
         color: var(--brand-900);
-        margin-top: 15px;
     }
 
     /* Pris */
@@ -70,6 +116,8 @@
         font-size: var(--body-text-xl);
         font-weight: 700;
         color: var(--brand-900);
+        margin-top: auto;
+        margin-bottom: 20px;
     }
 
     .treatment-price span {
@@ -77,69 +125,83 @@
         font-weight: 400;
     }
 
-    /* Knappar */
-    .beauty-btn {
-        display: inline-block;
-        background-color: #665548;
-        color: var(--white);
-        padding: 12px 24px;
-        border: none;
-        border-radius: 8px;
-        text-decoration: none;
-        margin-top: 20px;
-        cursor: pointer;
+    .treatment-card .beauty-btn {
+        display: block;
+        margin: 0 20px 20px;
     }
 
-    .beauty-btn:hover {
-        background-color: #4a3c32;
+    /* Markerad behandling */
+    .treatment-card.selected {
+        border: 2px solid var(--brand-primary);
     }
 
-   /* Bokningskort */
-.booking-section {
-    width: 100%;
-    
-    margin: 30px auto;
-    padding: 20px;
-    background-color: var(--brand-50);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
+    .treatment-card.selected .beauty-btn {
+        background-color: var(--brand-700);
+    }
 
-    /* Rubrik för bokning */
-   .booking-section h2 {
-    font-size: var(--body-text-xl);
-    margin-bottom: 15px;
-}
+    /* Bokningssektion */
+    .booking-section {
+        width: 100%;
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: var(--brand-50);
+        border: 1px solid var(--brand-200);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
 
-    /* Vald behandling */
+    .booking-section h2 {
+        font-size: var(--body-text-xl);
+        margin: 0 0 20px;
+    }
+
+    /* Vald behandling och totalpris */
     #selected-treatment {
-        margin-bottom: 20px;
-        white-space: pre-line;
+        padding: 18px;
+        margin-bottom: 25px;
+        background-color: var(--white);
+        border: 1px solid var(--brand-200);
+        border-radius: 8px;
+        line-height: 1.7;
     }
 
-    /* Etikett för antal */
+    /* Antal behandlingstillfällen */
     .booking-section label {
         display: block;
-        font-size: var(--body-text-md);
+        font-weight: 600;
         margin-bottom: 10px;
     }
 
-    /* Rullgardinsmeny */
-    #quantity {
+    #booking-quantity {
         width: 100%;
-        padding: 12px;
+        padding: 12px 15px;
         border: 1px solid var(--brand-200);
         border-radius: 8px;
         background-color: var(--white);
         color: var(--brand-1100);
+        cursor: pointer;
     }
 
-    /* Mobilanpassning */
+    #booking-quantity:focus-visible {
+        outline: 2px solid var(--brand-900);
+        outline-offset: 2px;
+    }
+
+    /* Surfplatta */
+    @media (max-width: 1000px) {
+        #treatment-list {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    /* Mobil */
     @media (max-width: 768px) {
         padding: 1rem;
 
         #treatment-list {
             grid-template-columns: 1fr;
+            gap: 20px;
         }
 
         .beauty-hero-img {
@@ -148,6 +210,7 @@
 
         .booking-section {
             padding: 20px;
+            margin: 35px auto;
         }
     }
 }

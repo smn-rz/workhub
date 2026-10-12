@@ -10,24 +10,31 @@
 </head>
 
 <body id="beauty-page">
-    <h1>Massage</h1>
+    <h1>En stund för dig själv</h1>
     <img src="images/spa-hero.png" alt="Avkopplande spamiljö" class="beauty-hero-img">
 
     <p class="beauty-intro">Vi erbjuder en mängd massagebehandlingar, skicka din bokningsförfrågan idag!</p>
     <a href="#treatment-list" class="beauty-btn">Se våra behandlingar</a>
 
     <section id="treatments">
-        <h2>Massagebehandlingar</h2>
+        
         <div id="treatment-list"></div>
     </section>
 
     <section class="booking-section">
-        <h2>Din bokning</h2>
+    <h2>Din bokning</h2>
 
-        <p id="selected-treatment"></p>
+    <p id="selected-treatment"></p>
 
-        
-    </section>
+    <label for="booking-quantity">Antal behandlingstillfällen:</label>
+    <select id="booking-quantity">
+        <option value="1">1 tillfälle</option>
+        <option value="2">2 tillfällen</option>
+        <option value="3">3 tillfällen</option>
+        <option value="4">4 tillfällen</option>
+        <option value="5">5 tillfällen</option>
+    </select>
+</section>
 
     <script src="beauty.js"></script>
 </body>

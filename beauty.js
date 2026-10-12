@@ -1,6 +1,12 @@
-const treatmentList = document.querySelector('#treatment-list');
 
-const treatments = [ //array med behandlingar
+"use strict";
+
+const treatmentList = document.querySelector("#treatment-list");
+const selectedTreatment = document.querySelector("#selected-treatment");
+const bookingQuantity = document.querySelector("#booking-quantity");
+
+// Våra massagebehandlingar
+const treatments = [
     {
         id: "facial-massage",
         name: "Ansiktsmassage",
@@ -8,8 +14,6 @@ const treatments = [ //array med behandlingar
         description: "En ansiktsmassage är en behandling som fokuserar på att stimulera blodcirkulationen och slappna av ansiktsmusklerna. Den kan hjälpa till att minska spänningar och ge en känsla av välbefinnande.",
         duration: 30,
         price: 500
-
-
     },
     {
         id: "swedish-massage",
@@ -28,80 +32,85 @@ const treatments = [ //array med behandlingar
         price: 1000
     }
 ];
-function calculatePrice(price, quantity) { // Funktion för att beräkna priset baserat på antal behandlingstillfällen
+
+// Sparar den behandling kunden väljer
+let selectedMassage = null;
+
+// Beräknar totalpriset
+function calculatePrice(price, quantity) {
     return price * quantity;
 }
-const booking = []; // lagra bokade behandlingar
 
-treatments.forEach(treatment => { // Loopar igenom varje behandling och skapar ett kort för varje behandling
+// Skapar ett kort för varje massagebehandling
+treatments.forEach(treatment => {
     treatmentList.innerHTML += `
         <article class="treatment-card">
             <img src="${treatment.image}" alt="${treatment.name}">
+
             <h3>${treatment.name}</h3>
             <p>${treatment.description}</p>
-            <p class="treatment-duration">⏱ ${treatment.duration} minuter</p>
-            <p class="treatment-price">${treatment.price} kr <span>/ tillfälle</span></p>
-            
-            <label for="quantity-${treatment.id}">Antal behandlingstillfällen:</label>
 
-<select id="quantity-${treatment.id}" class="treatment-quantity"> 
- <option value="" selected disabled>Välj antal tillfällen</option>
-    <option value="1">1 tillfälle</option>
-    <option value="2">2 tillfällen</option>
-    <option value="3">3 tillfällen</option>
-    <option value="4">4 tillfällen</option>
-    <option value="5">5 tillfällen</option>
-</select>
+            <p class="treatment-duration">
+                ⏱ ${treatment.duration} minuter
+            </p>
+
+            <p class="treatment-price">
+                ${treatment.price} kr <span>/ tillfälle</span>
+            </p>
 
             <button type="button" class="beauty-btn" data-id="${treatment.id}">
                 Välj behandling
             </button>
-            </article>
+        </article>
     `;
 });
 
-const buttons = document.querySelectorAll(".treatment-card button"); 
+// Uppdaterar bokningen och totalpriset
+function updateBooking() {
+    if (selectedMassage === null) {
+        selectedTreatment.textContent =
+            "Välj en behandling för att se totalpriset.";
+        return;
+    }
 
-const selectedTreatment = document.querySelector("#selected-treatment");// Hämta elementet där den valda behandlingen ska visas
+    const quantity = Number(bookingQuantity.value);
+
+
+    const totalPrice = calculatePrice(selectedMassage.price, quantity);
+
+    selectedTreatment.textContent =
+        selectedMassage.name + ": " +
+        quantity + " tillfällen. Totalt: " +
+        totalPrice + " kr";
+}
+
+// Hanterar klick på behandlingsknapparna
+const buttons = document.querySelectorAll(".treatment-card button");
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
+        const treatment = treatments.find(
+            massage => massage.id === button.dataset.id
+        );
 
-        // Hitta behandlingen som kunden klickat på
-        const treatment = treatments.find(massage => massage.id === button.dataset.id);
+        selectedMassage = treatment;
 
-        // Hämta antalet behandlingstillfällen
-        const quantity = Number(button.parentElement.querySelector(".treatment-quantity").value);
-        if (quantity === 0) {
-            alert("Välj antal behandlingstillfällen först!");
-            return;
-        }
-        // Kontrollera om behandlingen redan finns i bokningen
-        const existingBooking = booking.find(item => item.id === treatment.id);
-
-        if (existingBooking) {
-            // Uppdatera antalet om behandlingen redan finns
-            existingBooking.quantity = quantity;
-        } else {
-            // Lägg till behandlingen om den inte finns
-            booking.push({
-                id: treatment.id,
-                quantity: quantity
-            });
-        }
-
-        // Töm den 
-        selectedTreatment.textContent = "";
-
-        // Visa alla behandlingar som kunden har valt med priset också
-        booking.forEach(item => {
-            const massage = treatments.find(treatment => treatment.id === item.id);
-
-            const price = calculatePrice(massage.price, item.quantity);
-
-            selectedTreatment.textContent += massage.name + ": " + item.quantity + " tillfällen, " + price + " kr.\n";
+        // Markerar det valda massagekortet
+        document.querySelectorAll(".treatment-card").forEach(card => {
+            card.classList.remove("selected");
+            card.querySelector("button").textContent = "Välj behandling";
         });
 
-        console.log(booking);
+        button.parentElement.classList.add("selected");
+        button.textContent = "Vald behandling";
+        updateBooking();
     });
 });
+
+// Uppdaterar priset när kunden ändrar antal
+bookingQuantity.addEventListener("change", () => {
+    updateBooking();
+});
+
+// Visar startmeddelandet
+updateBooking();
