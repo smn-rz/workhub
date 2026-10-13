@@ -1,12 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkHub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
-<body>
 
+<body>
+    <header>
+        <div id="nav-container">
+            <svg id="workhub" viewbox="0 0 135 20">
+                <use href="images/WorkHub_logo.svg"></use>
+            </svg>
+            <div>
+                <svg id="burger" viewbox="0 0 32 20">
+                    <use href="images/burger.svg"></use>
+                </svg>
+            </div>
+        </div>
+
+
+    </header>
+    <main>
+        <section class="home-hero">
+            <div class="home-content">
+                <div class="img-container">
+                    <img src="images/homepage.png" alt="">
+                </div>
+                <h1>Välkommen till WorkHub</h1>
+                <p> Upptäck roliga aktiviteter, avkopplande behandlingar och minnesvärda upplevelser för alla!</p>
+                </div>
+
+        </section>
+
+        <section id="categories" class="home-categories">
+            <h2>Våra kategorier</h2>
+
+            <div class="category-grid">
+
+
+                <a href="games.html" class="category-card-games">
+                    <div class="category-content">
+                        <h3>Spel</h3>
+                        <p>Utforska våra spännande spel och utmana dig själv!</p>
+                    </div>
+                </a>
+
+                <a href="beauty.html" class="category-card-beauty">
+                    <div class="category-content">
+                        <h3>Skönhet</h3>
+                        <p>Behandlingar för avkoppling och välbefinnande</p>
+                    </div>
+                </a>
+
+                <a href="outdoor-adventures.html" class="category-card-adventures">
+                    <div class="category-content">
+                        <h3>Upplevelser</h3>
+                        <p>Upplevelser för alla åldrar</p>
+                    </div>
+                </a>
+            </div>
+
+
+        </section>
+
+    </main>
+    <footer class="home-footer">
+        <p>© 2026 WorkHub</p>
+
+    </footer>
 </body>
+
 </html>
