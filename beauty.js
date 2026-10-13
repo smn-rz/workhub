@@ -5,7 +5,7 @@ const treatmentList = document.querySelector("#treatment-list");
 const selectedTreatment = document.querySelector("#selected-treatment");
 const bookingQuantity = document.querySelector("#booking-quantity");
 
-// Våra massagebehandlingar
+//  massagebehandlingar
 const treatments = [
     {
         id: "facial-massage",
@@ -33,7 +33,7 @@ const treatments = [
     }
 ];
 
-// Sparar den behandling kunden väljer
+// Sparar den valda behandlingen
 let selectedMassage = null;
 
 // Beräknar totalpriset
@@ -41,14 +41,21 @@ function calculatePrice(price, quantity) {
     return price * quantity;
 }
 
-// Skapar ett kort för varje massagebehandling
+// Skapar massagekorten
 treatments.forEach(treatment => {
     treatmentList.innerHTML += `
         <article class="treatment-card">
             <img src="${treatment.image}" alt="${treatment.name}">
 
             <h3>${treatment.name}</h3>
-            <p>${treatment.description}</p>
+
+            <button type="button" class="accordion-btn" aria-expanded="false">
+                Läs mer om behandlingen
+            </button>
+
+            <div class="treatment-description">
+                <p>${treatment.description}</p>
+            </div>
 
             <p class="treatment-duration">
                 ⏱ ${treatment.duration} minuter
@@ -74,8 +81,6 @@ function updateBooking() {
     }
 
     const quantity = Number(bookingQuantity.value);
-
-
     const totalPrice = calculatePrice(selectedMassage.price, quantity);
 
     selectedTreatment.textContent =
@@ -84,33 +89,62 @@ function updateBooking() {
         totalPrice + " kr";
 }
 
-// Hanterar klick på behandlingsknapparna
-const buttons = document.querySelectorAll(".treatment-card button");
+// Hanterar val av behandling
+const buttons = document.querySelectorAll(".treatment-card .beauty-btn");
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
+
         const treatment = treatments.find(
             massage => massage.id === button.dataset.id
         );
 
         selectedMassage = treatment;
 
-        // Markerar det valda massagekortet
+        // Återställer tidigare val
         document.querySelectorAll(".treatment-card").forEach(card => {
             card.classList.remove("selected");
-            card.querySelector("button").textContent = "Välj behandling";
+            card.querySelector(".beauty-btn").textContent = "Välj behandling";
         });
 
+        // Markerar den valda behandlingen
         button.parentElement.classList.add("selected");
         button.textContent = "Vald behandling";
+
         updateBooking();
     });
 });
 
-// Uppdaterar priset när kunden ändrar antal
+// Uppdaterar priset när antalet ändras
 bookingQuantity.addEventListener("change", () => {
     updateBooking();
 });
 
-// Visar startmeddelandet
+// Öppnar och stänger behandlingsbeskrivningarna
+const accordionButtons = document.querySelectorAll(".accordion-btn");
+
+accordionButtons.forEach(button => {
+    button.addEventListener("click", () => {
+
+        const parent = button.parentElement;
+
+        if (parent.classList.contains("open")) {
+            parent.classList.remove("open");
+            button.setAttribute("aria-expanded", "false");
+            return;
+        }
+
+        // Stänger övriga beskrivningar
+        document.querySelectorAll(".treatment-card").forEach(card => {
+            card.classList.remove("open");
+            card.querySelector(".accordion-btn")
+                .setAttribute("aria-expanded", "false");
+        });
+
+        parent.classList.add("open");
+        button.setAttribute("aria-expanded", "true");
+    });
+});
+
+
 updateBooking();
