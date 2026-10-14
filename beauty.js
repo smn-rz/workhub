@@ -25,7 +25,7 @@ const treatments = [
     },
     {
         id: "hot-stone",
-        name: "Hot Stone-massage",
+        name: "Hot stone-massage",
         image: "images/hot-stone.png",
         description: "En hot stone-massage är en behandling som fokuserar på att stimulera blodcirkulationen och slappna av musklerna. Den kan hjälpa till att minska spänningar, förbättra hudens utseende och ge en känsla av välbefinnande.",
         duration: 60,
@@ -41,9 +41,10 @@ function calculatePrice(price, quantity) {
     return price * quantity;
 }
 
-// Skapar massagekorten
-treatments.forEach(treatment => {
-    treatmentList.innerHTML += `
+
+ // Skapar HTML för ett massagekort
+function createOfferCard(treatment) {
+    return `
         <article class="treatment-card">
             <img src="${treatment.image}" alt="${treatment.name}">
 
@@ -70,7 +71,11 @@ treatments.forEach(treatment => {
             </button>
         </article>
     `;
-});
+}
+
+// Visar massagekorten
+treatmentList.innerHTML = treatments.map(createOfferCard).join("");
+
 
 // Uppdaterar bokningen och totalpriset
 function updateBooking() {
