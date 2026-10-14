@@ -14,33 +14,33 @@ const expList = [
     {
         eId: `vr`,
         eTitle: `VIRTUAL REALITY`,
-        eStandardPrice: `169`,
+        eHourPrice: `169`,
         eDescription: `Stig in i den virtuella världen och upplev de magiska under vi kallar vr-spel. Skär dig igenom BEATSABER, äg dina kompis på LAZERTAG eller svinga dig från linjan till linjan som Tarzan i GORILLA TAG.`,
-        eInputId: `vr-input`,
-        eInputClass: `exp-input`
+        eInputId: `vr-input`
     },
     {
         eId: `arcade`,
         eTitle: `ARKAD`,
-        eStandardPrice: `149`,
+        eHourPrice: `149`,
         eDescription: `` + eStandardPrice + `` + `Upplev gaming som det var på 70- och 80-talet. Vår spelhall har över 200 olika cabinetter, med allt från gamla klassiker såsom STREET FIGHTER och DONKEY KONG till moderna spel såsom CYBERPUNK 2077: Turf Wars och MAIMAI DX. Vi har även tre dussin pinball maskiner, samt en hel avdelning för de yngre.`,
-        eInputId: `arcade-input`,
-        eInputClass: `exp-input`
+        eInputId: `arcade-input`
     },
     {
         eId: `internetCafe`,
         eTitle: `INTERNETCAFÉ`,
-        eStandardPrice: `129`,
+        eHourPrice: `129`,
         eDescription: ``,
-        eInputId: `pc-cafe-input`,
-        eInputClass: `exp-input`
+        eInputId: `pc-cafe-input`
     },
 ];
 
 function createExperience(id, name, price, description) {
     expList.forEach(element => {
-        experiences.innerHTML = `
-            
+        experiences.innerHTML += `
+            <div class="experiences" id="${eId}">
+	            <input type="radio" name="exp-input" id="${eInputId}" class="exp-input">
+                    <label for="${eId}" class="exp-label"><p>${eTitle}</p></label>
+                </div>
         `
     });
 }
