@@ -1,11 +1,13 @@
-
 "use strict";
 
+// Hämtar olika delar från HTML
 const treatmentList = document.querySelector("#treatment-list");
 const selectedTreatment = document.querySelector("#selected-treatment");
 const bookingQuantity = document.querySelector("#booking-quantity");
+const bookingConfirmation = document.querySelector("#booking-confirmation");
+const bookingPopup = document.querySelector("#booking-popup");
 
-//  massagebehandlingar
+// Alla massagebehandlingar med info och priser
 const treatments = [
     {
         id: "facial-massage",
@@ -33,16 +35,15 @@ const treatments = [
     }
 ];
 
-// Sparar den valda behandlingen
+// Ingen behandling vald från början
 let selectedMassage = null;
 
-// Beräknar totalpriset
+// Räknar ut priset beroende på antal
 function calculatePrice(price, quantity) {
     return price * quantity;
 }
 
-
- // Skapar HTML för ett massagekort
+// Skapar ett kort för varje behandling
 function createOfferCard(treatment) {
     return `
         <article class="treatment-card">
@@ -73,59 +74,66 @@ function createOfferCard(treatment) {
     `;
 }
 
-// Visar massagekorten
+// Går igenom alla behandlingar och visar korten
 treatmentList.innerHTML = treatments.map(createOfferCard).join("");
 
-
-// Uppdaterar bokningen och totalpriset
+// Uppdaterar det som visas i Din bokning
 function updateBooking() {
+
+    // Om ingen massage är vald visas denna text
     if (selectedMassage === null) {
         selectedTreatment.textContent =
             "Välj en behandling för att se totalpriset.";
         return;
     }
 
+    // Hämtar antal och räknar ut totalpriset
     const quantity = Number(bookingQuantity.value);
     const totalPrice = calculatePrice(selectedMassage.price, quantity);
 
+    // Visar vald massage, antal och pris
     selectedTreatment.textContent =
         selectedMassage.name + ": " +
         quantity + " tillfällen. Totalt: " +
         totalPrice + " kr";
 }
 
-// Hanterar val av behandling
+// Hämtar knapparna för behandlingarna
 const buttons = document.querySelectorAll(".treatment-card .beauty-btn");
 
+// Gör så man kan klicka på en behandling
 buttons.forEach(button => {
     button.addEventListener("click", () => {
 
+        // Hittar rätt behandling med hjälp av id
         const treatment = treatments.find(
             massage => massage.id === button.dataset.id
         );
 
+        // Sparar behandlingen man valt
         selectedMassage = treatment;
 
-        // Återställer tidigare val
+        // Tar bort markeringen från tidigare val
         document.querySelectorAll(".treatment-card").forEach(card => {
             card.classList.remove("selected");
             card.querySelector(".beauty-btn").textContent = "Välj behandling";
         });
 
-        // Markerar den valda behandlingen
+        // Markerar den nya behandlingen
         button.parentElement.classList.add("selected");
         button.textContent = "Vald behandling";
 
+        // Uppdaterar bokningen
         updateBooking();
     });
 });
 
-// Uppdaterar priset när antalet ändras
+// Räknar om priset när man ändrar antal
 bookingQuantity.addEventListener("change", () => {
     updateBooking();
 });
 
-// Öppnar och stänger behandlingsbeskrivningarna
+// Hämtar knapparna för att läsa mer
 const accordionButtons = document.querySelectorAll(".accordion-btn");
 
 accordionButtons.forEach(button => {
@@ -133,23 +141,151 @@ accordionButtons.forEach(button => {
 
         const parent = button.parentElement;
 
+        // Stänger beskrivningen om den redan är öppen
         if (parent.classList.contains("open")) {
             parent.classList.remove("open");
             button.setAttribute("aria-expanded", "false");
             return;
         }
 
-        // Stänger övriga beskrivningar
+        // Stänger de andra beskrivningarna
         document.querySelectorAll(".treatment-card").forEach(card => {
             card.classList.remove("open");
             card.querySelector(".accordion-btn")
                 .setAttribute("aria-expanded", "false");
         });
 
+        // Öppnar beskrivningen man klickat på
         parent.classList.add("open");
         button.setAttribute("aria-expanded", "true");
     });
 });
 
+// Kollar så textfältet inte är tomt
+function validateTextInput(input) {
+    if (input.value.trim() === '') {
+        input.classList.add('error');
+        return false;
+    } else {
+        input.classList.remove('error');
+        return true;
+    }
+}
 
+// Kontrollerar att eposten är giltig
+function validateEmail(input) {
+    const email = input.value;
+
+    // Delar upp eposten vid @
+    const parts = email.split('@');
+
+    // Kollar så eposten har rätt format
+    if (
+        email.includes(' ') ||
+        parts.length !== 2 ||
+        parts[0] === '' ||
+        parts[1] === '' ||
+        !parts[1].includes('.') ||
+        parts[1].startsWith('.') ||
+        parts[1].endsWith('.') ||
+        parts[1].includes('..')
+    ) {
+        // Markerar fältet om det är fel
+        input.classList.add('error');
+        return false;
+    } else {
+        // Tar bort felmarkeringen om det är rätt
+        input.classList.remove('error');
+        return true;
+    }
+}
+
+// Kollar om man har valt en massage
+function validateTreatment() {
+    if (selectedMassage === null) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+// Kollar att antalet är mellan 1 och 5
+function validateQuantity() {
+    const quantity = Number(bookingQuantity.value);
+
+    // Antalet måste vara ett heltal mellan 1 och 5
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 5) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+// Hämtar formuläret
+const regForm = document.querySelector('#regForm');
+
+// Körs när man klickar på Boka
+regForm.addEventListener('submit', e => {
+
+    // Hindrar sidan från att laddas om
+    e.preventDefault();
+
+    // Hämtar fälten från formuläret
+    const firstName = document.querySelector('#firstName');
+    const lastName = document.querySelector('#lastName');
+    const email = document.querySelector('#email');
+
+    // Kollar om alla uppgifter är rätt
+    const firstNameValid = validateTextInput(firstName);
+    const lastNameValid = validateTextInput(lastName);
+    const emailValid = validateEmail(email);
+    const treatmentValid = validateTreatment();
+    const quantityValid = validateQuantity();
+
+    // Stoppar bokningen om något inte stämmer
+    if (!firstNameValid || !lastNameValid || !emailValid || !treatmentValid || !quantityValid) {
+        return;
+    }
+
+    // Sparar användarens uppgifter
+    const user = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value
+    };
+
+    console.log(user);
+
+    // Räknar ut priset för bokningen
+    const quantity = Number(bookingQuantity.value);
+    const totalPrice = calculatePrice(selectedMassage.price, quantity);
+
+    // Skriver ut bokningsbekräftelsen
+    bookingConfirmation.textContent =
+        `Tack ${user.firstName} ${user.lastName}!
+        Din bokning är bekräftad.
+
+        Behandling: ${selectedMassage.name}
+        Antal tillfällen: ${quantity}
+        Totalt pris: ${totalPrice} kr
+        E-post: ${user.email}`;
+
+    // Visar popuprutan
+    bookingPopup.hidden = false;
+});
+
+// Visar starttexten i bokningsrutan
 updateBooking();
+
+// Hämtar börja om knappen
+const resetButton = document.querySelector("#reset-booking");
+
+// När man klickar på börja om
+resetButton.addEventListener("click", () => {
+
+    // Stänger popupen
+    bookingPopup.hidden = true;
+
+    // Tömmer formuläret
+    regForm.reset();
+});

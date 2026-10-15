@@ -266,6 +266,22 @@
         font-size: 14px;
     }
 
+.input-group input.error {
+    border: 2px solid red;
+}
+
+.invalid-input {
+    color: firebrick;
+    font-size: 0,9rem;
+    display: none;
+}
+
+.input-group input.error + .invalid-input {
+    display: block;
+}
+
+   
+}
     /* Bokning och formulär bredvid varandra */
     .booking-layout {
         display: grid;
@@ -283,6 +299,7 @@
         margin: 0 !important;
         box-sizing: border-box;
     }
+    
 
    
     @media (max-width: 1000px) {
@@ -313,4 +330,46 @@
             gap: 20px;
         }
     }
+    /* POPUP - BOKNINGSBEKRÄFTELSE */
+
+.booking-popup {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.booking-popup[hidden] {
+    display: none;
+}
+
+.popup-content {
+    background-color: var(--brand-50);
+    color: var(--brand-900);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h2 {
+    color: #665548;
+    margin-bottom: 20px;
+}
+ #booking-confirmation {
+    line-height: 1.8;
+    margin-bottom: 25px;
+    white-space: pre-line;
+}
+
+.popup-content .beauty-btn {
+    margin-top: 10px;
+}
 }

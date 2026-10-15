@@ -21,52 +21,68 @@
         <div id="treatment-list"></div>
     </section>
 
-   
-<div class="booking-layout">
 
-    <section class="booking-section">
-        <h2>Din bokning</h2>
+    <div class="booking-layout">
 
-        <p id="selected-treatment"></p>
+        <section class="booking-section">
+            <h2>Din bokning</h2>
 
-        <label for="booking-quantity">Antal behandlingstillfällen:</label>
-        <select id="booking-quantity">
-            <option value="1">1 tillfälle</option>
-            <option value="2">2 tillfällen</option>
-            <option value="3">3 tillfällen</option>
-            <option value="4">4 tillfällen</option>
-            <option value="5">5 tillfällen</option>
-        </select>
-    </section>
+            <p id="selected-treatment"></p>
 
-    <div class="container">
-        <form id="regForm" class="regForm">
+            <label for="booking-quantity">Antal behandlingstillfällen:</label>
+            <select id="booking-quantity">
+                <option value="1">1 tillfälle</option>
+                <option value="2">2 tillfällen</option>
+                <option value="3">3 tillfällen</option>
+                <option value="4">4 tillfällen</option>
+                <option value="5">5 tillfällen</option>
+            </select>
+        </section>
 
-            <div class="form-column">
+        <div class="container">
+            <form id="regForm" class="regForm" novalidate>
 
-                <div class="input-group">
-                    <label for="firstName" class="form-label">Förnamn</label>
-                    <input type="text" id="firstName">
+                <div class="form-column">
+
+                    <div class="input-group">
+                        <label for="firstName" class="form-label">Förnamn</label>
+                        <input type="text" id="firstName">
+                        <p class="invalid-input"> Firstname is required </p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lastName" class="form-label">Efternamn</label>
+                        <input type="text" id="lastName">
+                        <p class="invalid-input"> Lastname is required </p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email" class="form-label">E-postadress</label>
+                        <input type="email" id="email">
+                        <p class="invalid-input"> Email is required </p>
+                    </div>
+
+                    <button id="submit-btn" type="submit" class="beauty-btn">Boka</button>
+
                 </div>
 
-                <div class="input-group">
-                    <label for="lastName" class="form-label">Efternamn</label>
-                    <input type="text" id="lastName">
-                </div>
+            </form>
 
-                <div class="input-group">
-                    <label for="email" class="form-label">E-postadress</label>
-                    <input type="email" id="email">
-                </div>
 
-                <button type="submit" class="beauty-btn">Boka</button>
+        </div>
+        <div id="booking-popup" class="booking-popup" hidden>
+            <div class="popup-content">
+                <h2>Tack för din bokning!</h2>
 
+                <p id="booking-confirmation"></p>
+
+                <button type="button" id="reset-booking" class="beauty-btn">
+                    Börja om
+                </button>
             </div>
+        </div>
 
-        </form>
     </div>
-
-</div>
 
 
     <script src="beauty.js"></script>
