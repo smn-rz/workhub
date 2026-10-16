@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="outdoor-adventures.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
     <title>Friluftsäventyr</title>
 </head>
 <body>
     <!-- Header/Nav -->
 
-    <main>
+    <main class="grid-12-cols">
         <div class="content">
             <img class="featuredImg" src="https://mountainbikeskolan.se/wp-content/uploads/2024/11/DSC_3659.jpg" alt="Flera personer som cyklar med mountainbikes i skogen.">
     
@@ -19,28 +20,35 @@
     
             <fieldset class="offers" form="offerForm">
                 <legend>Välj erbjudande</legend>
-    
-                <div class="offer">
+
+                <label class="offer" for="offer1">
                     <input class="radioBtn" form="offerForm" type="radio" name="offer" id="offer1" value="Kanottur">
-                    <label class="text" for="offer1">
+                    <div class="text">
                         <div>
+                            <div class="durationBadge">120 min</div>
                             <p class="title">Kanottur</p>
                             <p class="description">Kort beskrivning...</p>
                         </div>
     
                         <p class="price">200 kr/enhet</p>
-                    </label>
-                </div>
+                    </div>
+                </label>
             </fieldset>
         </div>
 
         <form id="offerForm" action="" method="" novalidate>
+            <h2 class="formHeader">Boka din upplevelse</h2>
+
             <div class="offerAmount">
                 <label for="amount">Antal enhet (1-5) *</label>
                 <div class="counter">
-                    <button class="subtract" type="button">-</button>
+                    <button class="subtract" type="button">
+                        <i class="bi bi-dash-lg"></i>
+                    </button>
                     <input type="number" name="amount" id="amount" value="1">
-                    <button class="add" type="button">+</button>
+                    <button class="add" type="button">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
                 </div>
             </div>
 

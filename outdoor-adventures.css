@@ -31,11 +31,46 @@
     }
 }
 
+.grid-12-cols {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+    max-width: 100%;
+    padding: 0 12px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (width >= 576px) {
+        max-width: 540px;
+        padding: 0;
+    }
+
+    @media (width >= 768px) {
+        max-width: 720px;
+    }
+
+    @media (width >= 992px) {
+        max-width: 960px;
+    }
+
+    @media (width >= 1200px) {
+        max-width: 1140px;
+    }
+
+    @media (width >= 1400px) {
+        max-width: 1320px;
+    }
+}
+
 
 main {
-    margin: 20px 12px;
-
     .content {
+        grid-column: span 12;
+
+        @media (width >= 768px) {
+            grid-column: span 6;
+        }
+
         .featuredImg {
             max-width: 100%;
             height: auto;
@@ -50,14 +85,16 @@ main {
         }
     
         .offers {
+            margin-top: 32px;
             display: flex;
             flex-direction:column;
             gap: 16px;
             border: none;
     
             legend {
-                font-size: var(--body-text-lead);
+                font-size: var(--body-text-xl);
                 font-weight: 700;
+                margin-bottom: 8px;
             }
     
             .offer {
@@ -69,7 +106,15 @@ main {
                 border-radius: 16px;
 
                 &:hover {
-                    background-color: var(--brand-50);
+                    background-color: var(--brand-100);
+                }
+
+                &:active {
+                    background-color: var(--brand-200);
+                }
+
+                &:has(.radioBtn:checked) {
+                    background-color: var(--brand-100);
                 }
 
                 .radioBtn {
@@ -95,6 +140,15 @@ main {
                     flex: 1;
                     justify-content: space-between;
 
+                    .durationBadge {
+                        display: inline-block;
+                        font-size: var(--body-text-sm);
+                        padding: 4px;
+                        background-color: var(--system-info);
+                        color: var(--white);
+                        border-radius: 6px;
+                    }
+
                     .title {
                         font-weight: 700;
                         font-size: var(--body-text-xl);
@@ -113,13 +167,35 @@ main {
         }
     }
 
-    form {
+    #offerForm {
+        grid-column: span 12;
+
+        @media (width >= 768px) {
+            grid-column: span 6;
+        }
+
+        label {
+            margin-bottom: 4px;
+        }
+
+        .formHeader {
+            display: none;
+
+            @media (width >= 768px) {
+                display: block;
+            }
+        }
 
         .offerAmount {
+            margin: 16px 0;
+            display: flex;
+            flex-direction: column;
+
             .counter {
                 display: flex;
-                gap: 4px;
+                gap: 0px;
                 justify-content: space-between;
+                height: 44px;
 
                 .subtract, .add {
                     width: 80px;
@@ -137,6 +213,8 @@ main {
         }
 
         .totalPrice {
+            margin-bottom: 24px;
+
             .price {
                 font-size: var(--body-text-lead);
                 font-weight: 900;
@@ -147,10 +225,10 @@ main {
             border: none;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
 
             legend {
-                font-size: var(--body-text-lead);
+                font-size: var(--body-text-xl);
                 font-weight: 700;
                 margin-bottom: 8px;
             }
@@ -158,13 +236,20 @@ main {
             .userName, .userEmail {
                 display: flex;
                 flex-direction: column;
+
+                input {
+                    border: 1px solid var(--brand-1100);
+                    border-radius: 8px;
+                    padding: 12px;
+                }
             }
         }
 
         .buttons {
+            margin-top: 24px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
     }
 }
