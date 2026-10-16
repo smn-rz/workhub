@@ -52,6 +52,21 @@
         width: fit-content;
         margin: 20px auto;
     }
+    .beauty-btn-secondary {
+    background-color: transparent;
+    color: var(--brand-900);
+    border: 1px solid var(--brand-900);
+}
+
+.beauty-btn-secondary:hover {
+    background-color:var(--brand-primary);
+    color: white;
+    
+}
+
+    #clear-booking {
+    margin-top: 10px;
+}
 
     /* Behandlingar */
     #treatments {
@@ -280,8 +295,17 @@
     display: block;
 }
 
-   
+   .required  {
+    color: firebrick;
+    font-weight: bold;
 }
+.required-info {
+    font-size: var(--body-text-sm);
+    color: var(--brand-900);
+    margin-bottom: 10px;
+    margin-top: 8px;;
+}
+
     /* Bokning och formulär bredvid varandra */
     .booking-layout {
         display: grid;
@@ -291,6 +315,7 @@
         margin: 50px auto;
         align-items: stretch;
     }
+    
 
     .booking-layout .booking-section,
     .booking-layout .container {
@@ -299,7 +324,10 @@
         margin: 0 !important;
         box-sizing: border-box;
     }
-    
+    .error-message {
+    color: firebrick;
+    font-weight: 600;
+}
 
    
     @media (max-width: 1000px) {

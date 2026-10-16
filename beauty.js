@@ -79,7 +79,7 @@ treatmentList.innerHTML = treatments.map(createOfferCard).join("");
 
 // Uppdaterar det som visas i Din bokning
 function updateBooking() {
-
+selectedTreatment.classList.remove("error-message");
     // Om ingen massage är vald visas denna text
     if (selectedMassage === null) {
         selectedTreatment.textContent =
@@ -200,9 +200,11 @@ function validateEmail(input) {
     }
 }
 
-// Kollar om man har valt en massage
+// Kollar om man valt en massage
 function validateTreatment() {
     if (selectedMassage === null) {
+        selectedTreatment.textContent = "Du måste välja en behandling.";
+       selectedTreatment.classList.add("error-message");
         return false;
     } else {
         return true;
@@ -277,15 +279,43 @@ regForm.addEventListener('submit', e => {
 // Visar starttexten i bokningsrutan
 updateBooking();
 
-// Hämtar börja om knappen
+// Hämtar börja om knappen i popupen
 const resetButton = document.querySelector("#reset-booking");
 
-// När man klickar på börja om
-resetButton.addEventListener("click", () => {
+// Hämtar börja om knappen i formuläret
+const clearButton = document.querySelector("#clear-booking");
+
+// Återställer hela bokningen
+function resetBooking() {
 
     // Stänger popupen
     bookingPopup.hidden = true;
 
     // Tömmer formuläret
     regForm.reset();
-});
+
+    // Tar bort felmarkeringarna
+    document.querySelectorAll(".error").forEach(input => {
+        input.classList.remove("error");
+    });
+
+    // Återställer antal och vald massage
+    bookingQuantity.value = "1";
+    selectedMassage = null;
+    updateBooking();
+
+    // Tar bort markeringen på vald behandling
+    document.querySelectorAll(".treatment-card").forEach(card => {
+        card.classList.remove("selected");
+        card.querySelector(".beauty-btn").textContent = "Välj behandling";
+    });
+}
+
+// Börja om knappen i popupen
+resetButton.addEventListener("click", resetBooking);
+
+// Börja om knappen i formuläret
+clearButton.addEventListener("click", resetBooking);
+
+
+//lägg till secondary på börja om
