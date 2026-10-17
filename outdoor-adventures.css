@@ -133,33 +133,41 @@ main {
                         outline: 2px solid var(--brand-primary);
                     }
                 }
-    
-                .text {
+
+                .offerContent {
                     display: flex;
                     align-items: center;
                     flex: 1;
                     justify-content: space-between;
 
-                    .durationBadge {
-                        display: inline-block;
-                        font-size: var(--body-text-sm);
-                        padding: 4px;
-                        background-color: var(--system-info);
-                        color: var(--white);
-                        border-radius: 6px;
+                    .offerText {
+                        .durationBadge {
+                            display: inline-flex;
+                            gap: 4px;
+                            align-items: center;
+                            font-size: var(--body-text-sm);
+                            padding: 4px;
+                            background-color: var(--system-info);
+                            color: var(--white);
+                            border-radius: 8px;
+
+                            .durationBadgeIcon {
+                                font-size: var(--body-text-lg);
+                            }
+                        }
+
+                        .title {
+                            font-weight: 700;
+                            font-size: var(--body-text-lg);
+                            line-height: normal;
+                        }
+
+                        .description {
+    
+                        }
                     }
 
-                    .title {
-                        font-weight: 700;
-                        font-size: var(--body-text-xl);
-                        line-height: normal;
-                    }
-
-                    .description {
-
-                    }
-
-                    .price {
+                    .offerPrice {
 
                     }
                 }

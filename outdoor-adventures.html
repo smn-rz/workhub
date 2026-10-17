@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="outdoor-adventures.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <script src="outdoor-adventures.js" defer></script>
     <title>Friluftsäventyr</title>
 </head>
-<body>
+<body onload="main();">
     <!-- Header/Nav -->
 
     <main class="grid-12-cols">
@@ -21,18 +22,7 @@
             <fieldset class="offers" form="offerForm">
                 <legend>Välj erbjudande</legend>
 
-                <label class="offer" for="offer1">
-                    <input class="radioBtn" form="offerForm" type="radio" name="offer" id="offer1" value="Kanottur">
-                    <div class="text">
-                        <div>
-                            <div class="durationBadge">120 min</div>
-                            <p class="title">Kanottur</p>
-                            <p class="description">Kort beskrivning...</p>
-                        </div>
-    
-                        <p class="price">200 kr/enhet</p>
-                    </div>
-                </label>
+                <!-- JavaScript offers -->
             </fieldset>
         </div>
 
