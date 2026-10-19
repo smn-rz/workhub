@@ -93,7 +93,7 @@ body {
 }
 
 .card-bg {
-    background-color: rgba(30, 11, 0, 0.2);
+    background-color: var(--brand-100);
     border: none;
     border-radius: 16px;
     border-top: 1px solid var(--brand-50);
@@ -103,6 +103,7 @@ body {
     margin-bottom: 1.5rem;
     overflow: hidden;
     transition: 0.5s;
+
 }
 
 .booking-container {
@@ -114,14 +115,14 @@ body {
         .experience {
             grid-column: span 7;
             width: 70%;
-            transform: skew(-15deg);
+            transform: skew(-5deg);
             margin-bottom: 1.5rem;
             padding: 1rem;
 
             h2 {
                font-size: var(--body-text-xl);
                 color: var(--brand-1100);
-                transform: skew(15deg);
+                transform: skew(5deg);
                 font-weight: 700;
             }
 
@@ -213,7 +214,7 @@ body {
             select {
                 border: none;
                 border-radius: 16px;
-                background-color: rgba(30, 11, 0, 0.2);
+                background-color: var(--brand-400);
                 width: 100%;
                 margin: 0 1rem;
                 color: var(--brand-100);
