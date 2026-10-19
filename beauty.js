@@ -1,3 +1,4 @@
+
 "use strict";
 
 // Hämtar olika delar från HTML
@@ -6,6 +7,15 @@ const selectedTreatment = document.querySelector("#selected-treatment");
 const bookingQuantity = document.querySelector("#booking-quantity");
 const bookingConfirmation = document.querySelector("#booking-confirmation");
 const bookingPopup = document.querySelector("#booking-popup");
+const quantityError = document.querySelector("#quantity-error");
+
+const regForm = document.querySelector("#regForm");
+const firstNameInput = document.querySelector("#firstName");
+const lastNameInput = document.querySelector("#lastName");
+const emailInput = document.querySelector("#email");
+
+const resetButton = document.querySelector("#reset-booking");
+const clearButton = document.querySelector("#clear-booking");
 
 // Alla massagebehandlingar med info och priser
 const treatments = [
@@ -74,20 +84,44 @@ function createOfferCard(treatment) {
     `;
 }
 
-// Går igenom alla behandlingar och visar korten
+// Visar alla behandlingar på sidan
 treatmentList.innerHTML = treatments.map(createOfferCard).join("");
+
+// Hämtar knapparna efter att korten skapats
+const buttons = document.querySelectorAll(".treatment-card .beauty-btn");
+const accordionButtons = document.querySelectorAll(".accordion-btn");
+
+// Kollar att antalet är ett heltal mellan 1 och 5
+function isValidQuantity() {
+    const quantity = Number(bookingQuantity.value);
+
+    return (
+        bookingQuantity.value.trim() !== "" &&
+        Number.isInteger(quantity) &&
+        quantity >= 1 &&
+        quantity <= 5
+    );
+}
 
 // Uppdaterar det som visas i Din bokning
 function updateBooking() {
-selectedTreatment.classList.remove("error-message");
-    // Om ingen massage är vald visas denna text
+    selectedTreatment.classList.remove("error-message");
+
+    // Om ingen massage är vald
     if (selectedMassage === null) {
         selectedTreatment.textContent =
             "Välj en behandling för att se totalpriset.";
         return;
     }
 
-    // Hämtar antal och räknar ut totalpriset
+    // Visar inget pris om antalet är fel
+    if (!isValidQuantity()) {
+        selectedTreatment.textContent =
+            "Välj ett antal mellan 1 och 5.";
+        return;
+    }
+
+    // Räknar ut totalpriset
     const quantity = Number(bookingQuantity.value);
     const totalPrice = calculatePrice(selectedMassage.price, quantity);
 
@@ -98,10 +132,7 @@ selectedTreatment.classList.remove("error-message");
         totalPrice + " kr";
 }
 
-// Hämtar knapparna för behandlingarna
-const buttons = document.querySelectorAll(".treatment-card .beauty-btn");
-
-// Gör så man kan klicka på en behandling
+// Gör så man kan välja en behandling
 buttons.forEach(button => {
     button.addEventListener("click", () => {
 
@@ -113,7 +144,7 @@ buttons.forEach(button => {
         // Sparar behandlingen man valt
         selectedMassage = treatment;
 
-        // Tar bort markeringen från tidigare val
+        // Tar bort tidigare markering
         document.querySelectorAll(".treatment-card").forEach(card => {
             card.classList.remove("selected");
             card.querySelector(".beauty-btn").textContent = "Välj behandling";
@@ -123,19 +154,21 @@ buttons.forEach(button => {
         button.parentElement.classList.add("selected");
         button.textContent = "Vald behandling";
 
-        // Uppdaterar bokningen
         updateBooking();
     });
 });
 
-// Räknar om priset när man ändrar antal
-bookingQuantity.addEventListener("change", () => {
+// Uppdaterar bokningen när användaren skriver antal
+bookingQuantity.addEventListener("input", () => {
     updateBooking();
+
+    // Kontrollerar igen om fältet redan har ett fel
+    if (bookingQuantity.classList.contains("error")) {
+        validateQuantity();
+    }
 });
 
-// Hämtar knapparna för att läsa mer
-const accordionButtons = document.querySelectorAll(".accordion-btn");
-
+// Gör så man kan läsa mer om behandlingarna
 accordionButtons.forEach(button => {
     button.addEventListener("click", () => {
 
@@ -163,11 +196,11 @@ accordionButtons.forEach(button => {
 
 // Kollar så textfältet inte är tomt
 function validateTextInput(input) {
-    if (input.value.trim() === '') {
-        input.classList.add('error');
+    if (input.value.trim() === "") {
+        input.classList.add("error");
         return false;
     } else {
-        input.classList.remove('error');
+        input.classList.remove("error");
         return true;
     }
 }
@@ -177,25 +210,23 @@ function validateEmail(input) {
     const email = input.value;
 
     // Delar upp eposten vid @
-    const parts = email.split('@');
+    const parts = email.split("@");
 
     // Kollar så eposten har rätt format
     if (
-        email.includes(' ') ||
+        email.includes(" ") ||
         parts.length !== 2 ||
-        parts[0] === '' ||
-        parts[1] === '' ||
-        !parts[1].includes('.') ||
-        parts[1].startsWith('.') ||
-        parts[1].endsWith('.') ||
-        parts[1].includes('..')
+        parts[0] === "" ||
+        parts[1] === "" ||
+        !parts[1].includes(".") ||
+        parts[1].startsWith(".") ||
+        parts[1].endsWith(".") ||
+        parts[1].includes("..")
     ) {
-        // Markerar fältet om det är fel
-        input.classList.add('error');
+        input.classList.add("error");
         return false;
     } else {
-        // Tar bort felmarkeringen om det är rätt
-        input.classList.remove('error');
+        input.classList.remove("error");
         return true;
     }
 }
@@ -204,61 +235,79 @@ function validateEmail(input) {
 function validateTreatment() {
     if (selectedMassage === null) {
         selectedTreatment.textContent = "Du måste välja en behandling.";
-       selectedTreatment.classList.add("error-message");
+        selectedTreatment.classList.add("error-message");
         return false;
     } else {
         return true;
     }
 }
 
-// Kollar att antalet är mellan 1 och 5
+// Kontrollerar antalet och visar felmeddelande
 function validateQuantity() {
-    const quantity = Number(bookingQuantity.value);
-
-    // Antalet måste vara ett heltal mellan 1 och 5
-    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 5) {
+    if (!isValidQuantity()) {
+        bookingQuantity.classList.add("error");
+        quantityError.style.display = "block";
         return false;
     } else {
+        bookingQuantity.classList.remove("error");
+        quantityError.style.display = "none";
         return true;
     }
 }
 
-// Hämtar formuläret
-const regForm = document.querySelector('#regForm');
+// Kontrollerar förnamnet 
+firstNameInput.addEventListener("input", () => {
+    if (firstNameInput.classList.contains("error")) {
+        validateTextInput(firstNameInput);
+    }
+});
+
+// Kontrollerar efternamnet 
+lastNameInput.addEventListener("input", () => {
+    if (lastNameInput.classList.contains("error")) {
+        validateTextInput(lastNameInput);
+    }
+});
+
+// Kontrollerar eposten 
+emailInput.addEventListener("input", () => {
+    if (emailInput.classList.contains("error")) {
+        validateEmail(emailInput);
+    }
+});
 
 // Körs när man klickar på Boka
-regForm.addEventListener('submit', e => {
+regForm.addEventListener("submit", e => {
 
     // Hindrar sidan från att laddas om
     e.preventDefault();
 
-    // Hämtar fälten från formuläret
-    const firstName = document.querySelector('#firstName');
-    const lastName = document.querySelector('#lastName');
-    const email = document.querySelector('#email');
-
-    // Kollar om alla uppgifter är rätt
-    const firstNameValid = validateTextInput(firstName);
-    const lastNameValid = validateTextInput(lastName);
-    const emailValid = validateEmail(email);
+    // Kontrollerar alla uppgifter
+    const firstNameValid = validateTextInput(firstNameInput);
+    const lastNameValid = validateTextInput(lastNameInput);
+    const emailValid = validateEmail(emailInput);
     const treatmentValid = validateTreatment();
     const quantityValid = validateQuantity();
 
-    // Stoppar bokningen om något inte stämmer
-    if (!firstNameValid || !lastNameValid || !emailValid || !treatmentValid || !quantityValid) {
+    // Stoppar bokningen om något är fel
+    if (
+        !firstNameValid ||
+        !lastNameValid ||
+        !emailValid ||
+        !treatmentValid ||
+        !quantityValid
+    ) {
         return;
     }
 
     // Sparar användarens uppgifter
     const user = {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value
+        firstName: firstNameInput.value,
+        lastName: lastNameInput.value,
+        email: emailInput.value
     };
 
-    console.log(user);
-
-    // Räknar ut priset för bokningen
+    // Räknar ut priset
     const quantity = Number(bookingQuantity.value);
     const totalPrice = calculatePrice(selectedMassage.price, quantity);
 
@@ -274,22 +323,42 @@ regForm.addEventListener('submit', e => {
 
     // Visar popuprutan
     bookingPopup.hidden = false;
+
+    // Låser formuläret efter bokningen
+    regForm.querySelectorAll("input, button").forEach(element => {
+        element.disabled = true;
+    });
+
+    bookingQuantity.disabled = true;
+
+    // Låser knapparna för att välja behandling
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
 });
-
-// Visar starttexten i bokningsrutan
-updateBooking();
-
-// Hämtar börja om knappen i popupen
-const resetButton = document.querySelector("#reset-booking");
-
-// Hämtar börja om knappen i formuläret
-const clearButton = document.querySelector("#clear-booking");
 
 // Återställer hela bokningen
 function resetBooking() {
 
     // Stänger popupen
     bookingPopup.hidden = true;
+
+    // Tömmer den gamla bokningsbekräftelsen
+    bookingConfirmation.textContent = "";
+
+    // Tar bort felmeddelandet för antal
+    quantityError.style.display = "none";
+
+    // Låser upp formuläret igen
+    regForm.querySelectorAll("input, button").forEach(element => {
+        element.disabled = false;
+    });
+
+    bookingQuantity.disabled = false;
+
+    buttons.forEach(button => {
+        button.disabled = false;
+    });
 
     // Tömmer formuläret
     regForm.reset();
@@ -311,11 +380,11 @@ function resetBooking() {
     });
 }
 
+// Visar starttexten i bokningsrutan
+updateBooking();
+
 // Börja om knappen i popupen
 resetButton.addEventListener("click", resetBooking);
 
 // Börja om knappen i formuläret
 clearButton.addEventListener("click", resetBooking);
-
-
-//lägg till secondary på börja om
