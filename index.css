@@ -30,10 +30,14 @@ body {
     }   
        
 
-    div {
-        display: flex;
-        align-items: center;
-    }
+  #menu-button {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 }
 
 
@@ -130,5 +134,16 @@ body {
     .category-grid a {
         flex: 1;
 
+    }
+}
+#mobile-menu {
+    padding: 20px 2rem;
+    background-color: var(--brand-100);
+
+    a {
+        display: block;
+        color: var(--brand-900);
+        text-decoration: none;
+        margin-bottom: 15px;
     }
 }
