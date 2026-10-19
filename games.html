@@ -1,35 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bokning: Spel</title>
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="games.css">
-    <script src="games.js" async></script>
+    <script src="games.js" defer async></script>
 </head>
 
 <body>
+    <header>
+        <div id="nav-container">
+            <a href="#">
+                <svg id="workhub" viewbox="0 0 135 20">
+                        <use href="images/WorkHub_logo.svg"></use>
+                </svg>
+            </a>
+
+            <div>
+                <svg id="burger" viewbox="0 0 32 20">
+                    <use href="images/burger.svg"></use>
+                </svg>
+            </div>
+        </div>
+    </header>
+
     <main>
         <section class="centerizer">
-            <div class="img-container">
+            
+
+            <!-- <div class="img-container">
                 <img src="images/apex_bg.jpg" alt="game image: apex">
-            </div>
+            </div> -->
 
-            <div class="grid-container booking-card">
-                <div id="title"><h1>Din drömspelupplevelse</h1><p>Lorem ipsum dolor sit amet.</p></div>
+            <div class="grid-container booking-container">
+                <div id="title"><h1>VÄLJ DIN SPELUPPLEVELSE</h1><p>Lorem ipsum dolor sit amet.</p></div>
 
-                <div class="experiences">
+                <article id="experiences-card" class="grid-container">
+                    <button type="button" aria-pressed="false" class="experience" id="${expList.eId}">
+                        <h2>                            
+                            ${expList.eTitle}
+                        </h2>
+                        <span class="price">
+                            ${addKr(expList.eHourPrice)}
+                            <span class="perPrice"> / person / timme. </span>
+                        </span>
+                    </button>
+                </article>
 
+                <div class="experience-desc-container card-bg">
+                    <p id="experience-desc">Välj din upplevelse!</p>
+                    <a href="#games-form">
+                        Gå vidare till bokning 
+                    </a>
                 </div>
-                    
-                <div class="games-form">
 
+                <div class="games-form card-bg">
+                    <form>
+                        <div id="customer-hour-amount">
+                            <select required>
+                                <option value selected hidden>antal besökare</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <select required>
+                                <option value selected hidden>antal timmar</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="booking-details">
-
-                </div>
+                <!-- <div class="booking-details"></div> -->
             </div>
             
         </section>

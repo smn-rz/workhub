@@ -1,4 +1,7 @@
-const experiences = document.querySelector(`.experiences`);
+const expContainer = document.querySelector(`#experiences-card`);
+const expDescContainer = document.querySelector(`.experience-desc-container`)
+const expDesc = document.querySelector(`#experience-desc`)
+const exp = document.querySelector(`.experience`)
 let expDuration
 let expCost
 let expDate
@@ -15,32 +18,76 @@ const expList = [
         eId: `vr`,
         eTitle: `VIRTUAL REALITY`,
         eHourPrice: `169`,
-        eDescription: `Stig in i den virtuella världen och upplev de magiska under vi kallar vr-spel. Skär dig igenom BEATSABER, äg dina kompis på LAZERTAG eller svinga dig från linjan till linjan som Tarzan i GORILLA TAG.`,
-        eInputId: `vr-input`
+        eDescription: `Stig in i den virtuella världen och upplev de magiska under vi kallar vr-spel. Skär dig igenom BEATSABER, äg dina kompis på LAZERTAG eller svinga dig från linjan till linjan som Tarzan i GORILLA TAG.`
     },
     {
         eId: `arcade`,
         eTitle: `ARKAD`,
         eHourPrice: `149`,
-        eDescription: `` + eStandardPrice + `` + `Upplev gaming som det var på 70- och 80-talet. Vår spelhall har över 200 olika cabinetter, med allt från gamla klassiker såsom STREET FIGHTER och DONKEY KONG till moderna spel såsom CYBERPUNK 2077: Turf Wars och MAIMAI DX. Vi har även tre dussin pinball maskiner, samt en hel avdelning för de yngre.`,
-        eInputId: `arcade-input`
+        eDescription: `Upplev gaming som det var på 70- och 80-talet. Vår spelhall har över 200 olika cabinetter, med allt från gamla klassiker såsom STREET FIGHTER till moderna spel såsom CYBERPUNK 2077: Turf Wars.`
     },
     {
         eId: `internetCafe`,
         eTitle: `INTERNETCAFÉ`,
         eHourPrice: `129`,
-        eDescription: ``,
-        eInputId: `pc-cafe-input`
+        eDescription: ``
     },
-];
+]
 
-function createExperience(id, name, price, description) {
-    expList.forEach(element => {
-        experiences.innerHTML += `
-            <div class="experiences" id="${eId}">
-	            <input type="radio" name="exp-input" id="${eInputId}" class="exp-input">
-                    <label for="${eId}" class="exp-label"><p>${eTitle}</p></label>
-                </div>
-        `
-    });
+
+function createExperience(expList) {
+    return `
+        <button type="button" aria-pressed="false" class="experience card-bg" id="${expList.eId}">
+            <h2>
+                ${expList.eTitle}
+            </h2>
+            <span class="price">
+                ${addKr(expList.eHourPrice)}
+                <span class="perPrice"> / person / timme. </span>
+            </span>
+         </button>
+    `
 }
+
+function addKr(amount) {
+    return amount + " kr"
+}
+
+function printExperience() {
+    expContainer.innerHTML = expList.map(createExperience).join("")
+}
+
+function toggleAriaPressed(event) {
+    const selected = event.target.closest(".experience")
+
+    for (const experiences of expContainer.children) {
+        if (selected === experiences) {
+            experiences.ariaPressed = "true"
+            switch (experiences.id) {
+                case "vr":
+                    expDesc.textContent = expList[0].eDescription
+                    break;
+                case "arcade":
+                    expDesc.textContent = expList[1].eDescription
+                    break;
+                case "internetCafe":
+                    expDesc.textContent = expList[2].eDescription
+                    break;
+                default:
+            }
+            if (!expDescContainer.classList.contains(`desc-visible`)) {
+                expDescContainer.classList.add(`desc-visible`)
+            }
+        } 
+        else if (selected != null) { 
+            experiences.ariaPressed = "false"
+        }
+    }
+}
+
+
+expContainer.addEventListener("click", toggleAriaPressed)
+
+printExperience()
+
+console.log(expDesc.textContent)
