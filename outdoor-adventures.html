@@ -12,60 +12,62 @@
 <body onload="main();">
     <!-- Header/Nav -->
 
-    <main class="grid-12-cols">
-        <div class="content">
-            <img class="featuredImg" src="https://mountainbikeskolan.se/wp-content/uploads/2024/11/DSC_3659.jpg" alt="Flera personer som cyklar med mountainbikes i skogen.">
+    <main>
+        <div id="booking" class="grid-12-cols">
+            <div class="content">
+                <img class="featuredImg" src="https://mountainbikeskolan.se/wp-content/uploads/2024/11/DSC_3659.jpg" alt="Flera personer som cyklar med mountainbikes i skogen.">
+        
+                <h1>Frilufts&shy;äventyr</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel voluptatibus dolore aliquid tenetur alias.</p>
+        
+                <fieldset class="offers" form="offerForm">
+                    <legend>Välj erbjudande</legend>
     
-            <h1>Frilufts&shy;äventyr</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel voluptatibus dolore aliquid tenetur alias.</p>
+                    <!-- JavaScript offers -->
+                </fieldset>
+            </div>
     
-            <fieldset class="offers" form="offerForm">
-                <legend>Välj erbjudande</legend>
-
-                <!-- JavaScript offers -->
-            </fieldset>
+            <form id="offerForm" action="" method="" novalidate>
+                <h2 class="formHeader">Boka din upplevelse</h2>
+    
+                <div class="offerAmount">
+                    <label for="amount">Antal enhet (1-5) *</label>
+                    <div class="counter">
+                        <button class="subtract" type="button">
+                            <i class="bi bi-dash-lg"></i>
+                        </button>
+                        <input type="number" name="amount" id="amount" value="1">
+                        <button class="add" type="button">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
+                    </div>
+                </div>
+    
+                <div class="totalPrice">
+                    <p>Totalpris</p>
+                    <p class="price">0 kr</p>
+                </div>
+    
+                <fieldset class="personalDetails">
+                    <legend>Dina uppgifter</legend>
+    
+                    <div class="userName">
+                        <label for="name">Namn *</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+    
+                    <div class="userEmail">
+                        <label for="email">E-postadress *</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                </fieldset>
+    
+                <div class="buttons">
+                    <button id="submitBooking" type="submit" class="btn btn-primary">Boka</button>
+                    <button type="reset" class="btn btn-secondary">Börja om / Återställ</button>
+                </div>
+            </form>
         </div>
-
-        <form id="offerForm" action="" method="" novalidate>
-            <h2 class="formHeader">Boka din upplevelse</h2>
-
-            <div class="offerAmount">
-                <label for="amount">Antal enhet (1-5) *</label>
-                <div class="counter">
-                    <button class="subtract" type="button">
-                        <i class="bi bi-dash-lg"></i>
-                    </button>
-                    <input type="number" name="amount" id="amount" value="1">
-                    <button class="add" type="button">
-                        <i class="bi bi-plus-lg"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="totalPrice">
-                <p>Totalpris</p>
-                <p class="price">0 kr</p>
-            </div>
-
-            <fieldset class="personalDetails">
-                <legend>Dina uppgifter</legend>
-
-                <div class="userName">
-                    <label for="name">Namn *</label>
-                    <input type="text" name="name" id="name">
-                </div>
-
-                <div class="userEmail">
-                    <label for="email">E-postadress *</label>
-                    <input type="email" name="email" id="email">
-                </div>
-            </fieldset>
-
-            <div class="buttons">
-                <button type="submit" class="btn btn-primary">Boka</button>
-                <button type="reset" class="btn btn-secondary">Börja om / Återställ</button>
-            </div>
-        </form>
     </main>
 
     <!-- Footer -->

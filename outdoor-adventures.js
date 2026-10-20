@@ -45,7 +45,12 @@ function main() {
     const personalDetails = document.querySelector(".personalDetails");
     personalDetails.addEventListener("input", handlePersonalDetails);
 
-    // TODO: handle click on Book and Reset buttons
+    const submitBookingBtn = document.querySelector("#submitBooking");
+    submitBookingBtn.addEventListener("click", handleSubmitBooking);
+
+    // TODO: handle click on New Booking button
+
+    // TODO: handle click on Reset button
 }
 
 
@@ -177,4 +182,150 @@ function handlePersonalDetails(e) {
     } else {
         return;
     }
+}
+
+
+function handleSubmitBooking(e) {
+    e.preventDefault();
+
+    // TODO: Validation
+
+    renderBookingConfirmation();
+
+    // Hides booking container and only shows booking confirmation
+    const bookingContainer = document.querySelector("#booking");
+    bookingContainer.style.display = "none";
+}
+
+
+function createBookingConfirmation() {
+    // Create all elements & add attributes + values to elements
+    const bookingConfirmationContainer = document.createElement("div");
+    bookingConfirmationContainer.id = "bookingConfirmation";
+    bookingConfirmationContainer.classList.add("grid-12-cols");
+
+    const header = document.createElement("div");
+    header.classList.add("header");
+
+    const checkmarkIcon = document.createElement("i");
+    checkmarkIcon.classList.add("checkmarkIcon", "bi", "bi-check-circle-fill");
+
+    const h1 = document.createElement("h1");
+    h1.textContent = "Din bokning är bekräftad!";
+
+    const p = document.createElement("p");
+    p.textContent = "Tack för din bokning. Vi har mottagit din förfrågan och återkommer till dig snarast via e-post.";
+
+    const bookingDetails = document.createElement("div");
+    bookingDetails.classList.add("bookingDetails");
+
+    const bookingDetailsTitle = document.createElement("p");
+    bookingDetailsTitle.classList.add("title");
+    bookingDetailsTitle.textContent = "Bokningsdetaljer";
+
+    const detailsContainer = document.createElement("div");
+    detailsContainer.classList.add("details");
+
+    const detailNameContainer = document.createElement("div");
+    detailNameContainer.classList.add("detail");
+
+    const detailNameLabel = document.createElement("p");
+    detailNameLabel.classList.add("label");
+    detailNameLabel.textContent = "Namn";
+
+    const detailNameText = document.createElement("p");
+    detailNameText.classList.add("name");
+    detailNameText.textContent = currentBooking.userName;
+
+    const detailEmailContainer = document.createElement("div");
+    detailEmailContainer.classList.add("detail");
+
+    const detailEmailLabel = document.createElement("p");
+    detailEmailLabel.classList.add("label");
+    detailEmailLabel.textContent = "E-post";
+
+    const detailEmailText = document.createElement("p");
+    detailEmailText.classList.add("email");
+    detailEmailText.textContent = currentBooking.userEmail;
+
+    const detailOfferContainer = document.createElement("div");
+    detailOfferContainer.classList.add("detail");
+
+    const detailOfferLabel = document.createElement("p");
+    detailOfferLabel.classList.add("label");
+    detailOfferLabel.textContent = "Erbjudande";
+
+    const detailOfferText = document.createElement("p");
+    detailOfferText.classList.add("offer");
+    detailOfferText.textContent = currentBooking.selectedOffer?.title;
+
+    const detailDurationContainer = document.createElement("div");
+    detailDurationContainer.classList.add("detail");
+
+    const detailDurationLabel = document.createElement("p");
+    detailDurationLabel.classList.add("label");
+    detailDurationLabel.textContent = "Tidslängd";
+
+    const detailDurationText = document.createElement("p");
+    detailDurationText.classList.add("duration");
+    detailDurationText.textContent = `${currentBooking.selectedOffer?.durationMin} minuter`;
+
+    const detailAmountContainer = document.createElement("div");
+    detailAmountContainer.classList.add("detail");
+
+    const detailAmountLabel = document.createElement("p");
+    detailAmountLabel.classList.add("label");
+    detailAmountLabel.textContent = "Antal personer";
+
+    const detailAmountText = document.createElement("p");
+    detailAmountText.classList.add("amount");
+    detailAmountText.textContent = currentBooking.offerAmount;
+
+    const detailTotalPriceContainer = document.createElement("div");
+    detailTotalPriceContainer.classList.add("detail");
+
+    const detailTotalPriceLabel = document.createElement("p");
+    detailTotalPriceLabel.classList.add("label");
+    detailTotalPriceLabel.textContent = "Totalpris";
+
+    const detailTotalPriceText = document.createElement("p");
+    detailTotalPriceText.classList.add("totalPrice");
+    const totalPrice = currentBooking.selectedOffer?.price * currentBooking.offerAmount;
+    detailTotalPriceText.textContent = `${totalPrice.toLocaleString("sv-SE")} kr`;
+
+    const buttons = document.createElement("div");
+    buttons.classList.add("buttons");
+
+    const primaryBtn = document.createElement("button");
+    primaryBtn.classList.add("btn", "btn-primary");
+    primaryBtn.textContent = "Boka en ny upplevelse";
+
+    const secondaryBtn = document.createElement("a");
+    secondaryBtn.classList.add("btn", "btn-secondary");
+    secondaryBtn.href = "/";
+    secondaryBtn.textContent = "Tillbaka till startsida";
+
+
+    // Nesting all elements
+    bookingConfirmationContainer.append(header, bookingDetails, buttons);
+    header.append(checkmarkIcon, h1, p);
+    bookingDetails.append(bookingDetailsTitle, detailsContainer);
+    detailsContainer.append(detailNameContainer, detailEmailContainer, detailOfferContainer, detailDurationContainer, detailAmountContainer, detailTotalPriceContainer);
+    detailNameContainer.append(detailNameLabel, detailNameText);
+    detailEmailContainer.append(detailEmailLabel, detailEmailText);
+    detailOfferContainer.append(detailOfferLabel, detailOfferText);
+    detailDurationContainer.append(detailDurationLabel, detailDurationText);
+    detailAmountContainer.append(detailAmountLabel, detailAmountText);
+    detailTotalPriceContainer.append(detailTotalPriceLabel, detailTotalPriceText);
+    buttons.append(primaryBtn, secondaryBtn);
+
+    // Return the complete booking confirmation
+    return bookingConfirmationContainer;
+}
+
+
+function renderBookingConfirmation() {
+    const bookingConfirmation = createBookingConfirmation();
+    const main = document.querySelector("main");
+    main.append(bookingConfirmation);
 }
