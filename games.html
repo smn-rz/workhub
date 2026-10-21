@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,7 @@
         <div id="nav-container">
             <a href="#">
                 <svg id="workhub" viewbox="0 0 135 20">
-                        <use href="images/WorkHub_logo.svg"></use>
+                    <use href="images/WorkHub_logo.svg"></use>
                 </svg>
             </a>
 
@@ -29,18 +30,21 @@
 
     <main>
         <section class="centerizer">
-            
+
 
             <!-- <div class="img-container">
                 <img src="images/apex_bg.jpg" alt="game image: apex">
             </div> -->
 
             <div class="grid-container booking-container">
-                <div id="title"><h1>VÄLJ DIN SPELUPPLEVELSE</h1><p>Lorem ipsum dolor sit amet.</p></div>
+                <div id="title">
+                    <h1>VÄLJ DIN SPELUPPLEVELSE</h1>
+                    <p>Lorem ipsum dolor sit amet.</p>
+                </div>
 
                 <article id="experiences-card" class="grid-container">
                     <button type="button" aria-pressed="false" class="experience" id="${expList.eId}">
-                        <h2>                            
+                        <h2>
                             ${expList.eTitle}
                         </h2>
                         <span class="price">
@@ -50,39 +54,81 @@
                     </button>
                 </article>
 
-                <div class="experience-desc-container card-bg">
+                <article class="experience-desc-container card-bg">
                     <p id="experience-desc">Välj din upplevelse!</p>
-                    <a href="#games-form">
-                        Gå vidare till bokning 
+                    <a id="desc-btn" href="#games-form">
+                        Gå vidare till bokning
                     </a>
-                </div>
+                </article>
 
-                <div class="games-form card-bg">
-                    <form>
-                        <div id="customer-hour-amount">
-                            <select required>
-                                <option value selected hidden>antal besökare</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <select required>
-                                <option value selected hidden>antal timmar</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
+                <article id="games-form" class="games-form card-bg">
+                    <form id="booking-form" class="booking-flex" method="post">
+
+                        <div class="booking-flex">
+                            <div class="form-group">
+                                <select required class="input-field">
+                                    <option value selected hidden>antal besökare*</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <span class="dropdown-arrow"></span>
+                                <span class="hidden-label">Besökare</span>
+                            </div>
+
+                            <div class="form-group">
+                                <select required class="input-field">
+                                    <option value selected hidden>antal timmar*</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <span class="dropdown-arrow"></span>
+                                <span class="hidden-label">Timmar</span>
+                            </div>
+
+                            <div class="form-group input-detected">
+                                <input type="date" id="booking-date" class="input-field">
+                                <span class="hidden-label">Datum*</span>
+                            </div>
+
+                            <div class="time-select">
+                            </div>
+                            
+                            <div class="your-name form-group" class="input-field">
+                                <input type="text" placeholder="Ditt namn*" class="input-field" required>
+                                <span class="dropdown-arrow"></span>
+                                <span class="hidden-label">Namn</span>
+                            </div>
+
+                            <div class="your-email form-group">
+                                <input type="email" placeholder="Din e-mail*" class="input-field">
+                                <span class="dropdown-arrow"></span>
+                                <span class="hidden-label">E-mail</span>
+                            </div>
+
+                            <div class="form-btns form-group">
+                                <button id="clear-form" class="form-btn">Rensa</button>
+                                <button id="submit-form" type="submit" class="form-btn">Slutför bokning</button>
+                            </div>
                         </div>
                     </form>
-                </div>
+                </article>
 
-                <!-- <div class="booking-details"></div> -->
+                <article class="booking-details card-bg">
+                    <div class="review-booking">
+                        <h2>GRANSKA DIN BOKNING</h2>
+                        <div class="user-details">
+
+                        </div>
+                    </div>
+                </article>
             </div>
-            
+
         </section>
     </main>
 </body>
