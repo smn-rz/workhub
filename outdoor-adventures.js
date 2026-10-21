@@ -48,9 +48,8 @@ function main() {
     const submitBookingBtn = document.querySelector("#submitBooking");
     submitBookingBtn.addEventListener("click", handleSubmitBooking);
 
-    // TODO: handle click on New Booking button
-
-    // TODO: handle click on Reset button
+    const resetBookingBtn = document.querySelector("#resetBooking");
+    resetBookingBtn.addEventListener("click", handleResetBooking);
 }
 
 
@@ -130,6 +129,7 @@ function handleOfferClick(e) {
 
 
 function updateOfferSelection(offerId) {
+    // Find offer from offers list based on ID
     const offer = offersList.find(offer => offer.id == offerId);
 
     currentBooking.selectedOffer = offer;
@@ -137,11 +137,11 @@ function updateOfferSelection(offerId) {
 
 
 function updateTotalPrice() {
-    const totalPrice = document.querySelector(".price");
+    const price = document.querySelector(".price");
 
-    price = currentBooking.selectedOffer.price * currentBooking.offerAmount;
+    totalPrice = currentBooking.selectedOffer ? currentBooking.selectedOffer.price * currentBooking.offerAmount : 0;
 
-    totalPrice.textContent = `${price.toLocaleString("sv-SE")} kr`;
+    price.textContent = `${totalPrice.toLocaleString("sv-SE")} kr`;
 }
 
 
@@ -195,6 +195,10 @@ function handleSubmitBooking(e) {
     // Hides booking container and only shows booking confirmation
     const bookingContainer = document.querySelector("#booking");
     bookingContainer.style.display = "none";
+
+    // Handler incase user wants to do another new booking
+    const newBookingBtn = document.querySelector("#newBooking");
+    newBookingBtn.addEventListener("click", handleNewBooking);
 }
 
 
@@ -297,6 +301,7 @@ function createBookingConfirmation() {
     buttons.classList.add("buttons");
 
     const primaryBtn = document.createElement("button");
+    primaryBtn.id = "newBooking";
     primaryBtn.classList.add("btn", "btn-primary");
     primaryBtn.textContent = "Boka en ny upplevelse";
 
@@ -328,4 +333,40 @@ function renderBookingConfirmation() {
     const bookingConfirmation = createBookingConfirmation();
     const main = document.querySelector("main");
     main.append(bookingConfirmation);
+}
+
+
+function handleNewBooking() {
+    // Reset the offer booking form
+    const offerForm = document.querySelector("#offerForm");
+    offerForm.reset();
+
+    // Reset the currentBooking object
+    currentBooking.selectedOffer = null;
+    currentBooking.offerAmount = 1;
+    currentBooking.userName = "";
+    currentBooking.userEmail = "";
+
+    // Update total price back to 0 kr
+    updateTotalPrice();
+
+    // Show booking container
+    const bookingContainer = document.querySelector("#booking");
+    bookingContainer.removeAttribute("style");
+
+    // Remove booking confirmation
+    const bookingConfirmation = document.querySelector("#bookingConfirmation");
+    bookingConfirmation.remove();
+}
+
+
+function handleResetBooking() {
+    // Reset the currentBooking object
+    currentBooking.selectedOffer = null;
+    currentBooking.offerAmount = 1;
+    currentBooking.userName = "";
+    currentBooking.userEmail = "";
+
+    // Update total price back to 0 kr
+    updateTotalPrice();
 }
