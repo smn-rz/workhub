@@ -1,8 +1,7 @@
-
 #beauty-page {
     padding: 2rem;
 
-    /* RUBRIK OCH INTRODUKTION */
+
 
     h1 {
         text-align: center;
@@ -25,7 +24,7 @@
         border-radius: 12px;
     }
 
-    /* KNAPPAR */
+
 
     .beauty-btn {
         display: inline-block;
@@ -61,7 +60,7 @@
         }
     }
 
-    .beauty-intro + .beauty-btn {
+    .beauty-intro+.beauty-btn {
         display: block;
         width: fit-content;
         margin: 20px auto;
@@ -71,7 +70,6 @@
         margin-top: 10px;
     }
 
-    /* BEHANDLINGAR */
 
     #treatments {
         margin-top: 50px;
@@ -82,8 +80,6 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 24px;
     }
-
-    /* BEHANDLINGSKORT */
 
     .treatment-card {
         display: flex;
@@ -140,7 +136,6 @@
             margin: 0 20px 20px;
         }
 
-        /* VALD BEHANDLING */
 
         &.selected {
             border: 2px solid var(--brand-primary);
@@ -150,7 +145,6 @@
             }
         }
 
-        /* ACCORDION */
 
         .accordion-btn {
             display: flex;
@@ -192,8 +186,6 @@
         }
     }
 
-    /* BOKNING OCH FORMULÄR */
-
     .booking-layout {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -211,8 +203,6 @@
         }
     }
 
-    /* GEMENSAM DESIGN FÖR BOKNINGSRUTOR */
-
     .booking-section,
     .container {
         width: 100%;
@@ -224,7 +214,7 @@
         box-sizing: border-box;
     }
 
-    /* BOKNINGSSAMMANFATTNING */
+
 
     .booking-section {
         h2 {
@@ -269,8 +259,6 @@
         }
     }
 
-    /* FORMULÄR */
-
     .regForm {
         width: 100%;
     }
@@ -299,7 +287,7 @@
             &.error {
                 border: 2px solid firebrick;
 
-                + .invalid-input {
+                +.invalid-input {
                     display: block;
                 }
             }
@@ -335,7 +323,6 @@
         font-weight: 600;
     }
 
-    /* POPUP - BOKNINGSBEKRÄFTELSE */
 
     .booking-popup {
         position: fixed;
@@ -379,7 +366,7 @@
         }
     }
 
-    /* RESPONSIV DESIGN */
+
 
     @media (max-width: 1000px) {
         #treatment-list {
