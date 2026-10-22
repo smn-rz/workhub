@@ -37,6 +37,65 @@
     --body-text-lead: 1.5rem;
 }
 
+/* TILLFÄLLIGT I PRIVAT CSS*/
+
+#nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem 2rem;
+}
+
+#workhub {
+    width: 150px;
+    height: auto;
+}
+
+#burger {
+    width: 30px;
+    height: 24px;
+}
+
+#menu-button {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#nav-menu {
+    padding: 20px 2rem;
+    background-color: var(--brand-100);
+}
+
+#nav-menu a {
+    display: block;
+    color: var(--brand-900);
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+#nav-menu[hidden] {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    #workhub {
+        width: 250px;
+    }
+
+    #burger {
+        width: 48px;
+        height: 38.5px;
+    }
+}
+
+
+
+
 body {
     font-family: "Inter", sans-serif;
     font-size: var(--body-text-md);

@@ -381,3 +381,12 @@ clearButton.addEventListener("click", resetBooking);
 
 
 updateBooking();
+
+
+
+const menuButton = document.querySelector("#menu-button");
+const navMenu = document.querySelector("#nav-menu");
+
+menuButton.addEventListener("click", () => {
+    navMenu.hidden = !navMenu.hidden;
+});
