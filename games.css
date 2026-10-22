@@ -6,7 +6,7 @@ html {
 }
 
 body {
-    background: conic-gradient(from 90deg at 1px 1px, rgb(255, 230, 214) 25%, rgba(20,20,20 ,0.025) 0) 0 0/40px 40px, rgb(255, 230, 214);
+    background: conic-gradient(from 90deg at 1px 1px, rgb(255, 230, 214) 25%, rgba(20, 20, 20, 0.025) 0) 0 0/40px 40px, rgb(255, 230, 214);
 }
 
 #nav-container {
@@ -15,13 +15,11 @@ body {
     width: 100%;
     margin: 0;
     padding: 0.75rem 0.75rem;
-    
+
     #workhub {
         width: 150px;
         height: auto;
-       
-        
-        
+
         @media (width >=768px) {
             width: 250px;
         }
@@ -35,7 +33,7 @@ body {
             width: 48px;
             height: 38.5px;
         }
-    }   
+    }
 }
 
 
@@ -60,7 +58,8 @@ body {
 
     margin: 1rem 0 1rem;
 
-    h1, p {
+    h1,
+    p {
         /* font-family: var(--logo-font); */
         color: var(--brand-1100);
         padding: 0 0;
@@ -83,7 +82,7 @@ body {
     height: 300px;
     width: 120dvw;
 
-    img {  
+    img {
         height: 100%;
         width: 100%;
         object-fit: cover;
@@ -106,11 +105,40 @@ body {
 
 }
 
+.btn {
+    border: none;
+    background-color: var(--brand-500);
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    font-size: var(--body-text-sm);
+    color: var(--brand-50);
+    transition: 0.2s all;
+
+
+    @media (width > 768px) {
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0.15rem 0.15rem 0.25rem 0.5px rgba(30, 11, 3, 0.2);
+            transition: 0.2s all;
+        }
+    }
+
+    &:active {
+        background-color: var(--brand-200);
+        transform: translateY(-4px);
+        transition: 0.2s all;
+    }
+}
+
 .booking-container {
     user-select: none;
 
     #experiences-card {
         grid-column: span 7;
+        @media (width > 768px) {
+            display: flex;
+            gap: 2rem;
+        }
 
         .experience {
             grid-column: span 7;
@@ -119,8 +147,13 @@ body {
             margin-bottom: 1.5rem;
             padding: 1rem;
 
+            @media (width > 768px) {
+                transform: skew(0deg);
+                width: 50%;
+            }
+
             h2 {
-               font-size: var(--body-text-xl);
+                font-size: var(--body-text-xl);
                 color: var(--brand-1100);
                 transform: skew(5deg);
                 font-weight: 700;
@@ -132,7 +165,7 @@ body {
                 bottom: 0;
                 left: 0;
                 height: 100%;
-                width: 50%;
+                width: 0%;
                 background: linear-gradient(to left, rgba(255, 247, 241, 0.5), transparent);
                 filter: blur(0px);
                 transform: skew(30deg);
@@ -142,6 +175,7 @@ body {
 
             &[aria-pressed="true"] {
                 width: 100%;
+
                 &::before {
                     width: 120%;
                 }
@@ -149,13 +183,14 @@ body {
 
             .price {
                 font-size: var(--body-text-sm);
+
                 .perPrice {
                     font-size: var(--body-text-xs);
                     color: rgb(30, 11, 0, .75);
                 }
             }
         }
-        
+
     }
 
     .experience-desc-container {
@@ -164,10 +199,10 @@ body {
         flex-direction: column;
         justify-content: space-between;
         border: none;
-        height: 0px;        
+        height: 0px;
         margin-bottom: 1.5rem;
 
-        
+
         p {
             text-align: justify;
             color: var(--brand-1100);
@@ -175,6 +210,7 @@ body {
 
         a {
             margin-top: 0.5rem;
+
             &::before {
                 font-family: "bootstrap-icons";
                 content: "\F282";
@@ -184,16 +220,11 @@ body {
 
             align-self: flex-end;
             text-decoration: none;
-            color: var(--brand-100);
-            background-color: var(--brand-500);
-            border-radius: 16px;
-            padding: 0.25rem 0.5rem;
-            text-align: right;
         }
     }
 
     .desc-visible {
-        
+
         height: 90%;
         padding: 0.75rem 1rem;
         transition: 0.5s;
@@ -205,14 +236,31 @@ body {
         grid-column: span 7;
         padding: 1rem 0;
         display: none;
-        
+
         .booking-flex {
             display: flex;
             align-items: center;
             flex-direction: column;
+
+            @media (width > 768px) {
+                display: grid;
+                grid-template-columns: 1 1;
+            }
         }
 
-        
+        @media (width > 768px) {
+            #amount-group, #name-group {
+                grid-column: 1 / span 1;
+            }
+            #duration-group, #email-group {
+                grid-column: 2 / span 1;
+            }
+            #date-group, #time-group {
+                grid-column: span 2;
+            }
+            
+        }
+
         .time-select {
             display: flex;
             width: 100%;
@@ -223,8 +271,8 @@ body {
             gap: 0.25rem;
             flex-wrap: wrap;
         }
-        
-        
+
+
         .time {
             display: flex;
             justify-content: center;
@@ -235,24 +283,24 @@ body {
             font-size: 0.65rem;
             padding: 0.5rem 1rem;
             margin-bottom: 0.35rem;
-            
+
             &[aria-pressed="true"] {
                 background-color: var(--brand-500);
                 transition: 0.3s all;
             }
         }
-        
+
         .form-group {
             display: flex;
             width: 100%;
             position: relative;
-            margin-bottom: 1.25rem;
+            margin-bottom: 2rem;
         }
-        
-        
+
+
         .input-field {
-            height: 3.25rem;
-            max-height: 3.25rem;
+            height: 3.5rem;
+            max-height: 4rem;
             appearance: none;
             border: none;
             border-radius: 48px;
@@ -260,23 +308,23 @@ body {
             width: 100%;
             margin: 0 1rem;
             color: rgba(30, 11, 0, 0.35);
-            padding: 1rem;
+            padding: 0.75rem 1.5rem;
             font-size: var(--body-text-sm);
             transition: 0.2s all;
         }
 
-        
+
         #booking-date {
             padding: 1.5rem .8rem 1rem;
         }
 
-        
+
         input::placeholder {
             color: rgba(30, 11, 0, 0.35);
             font-size: var(--body-text-sm);
         }
-        
-        
+
+
         .dropdown-arrow {
             position: absolute;
             right: 2rem;
@@ -284,6 +332,7 @@ body {
             display: flex;
             align-items: center;
             pointer-events: none;
+
             &::after {
                 font-family: "bootstrap-icons";
                 content: '\F124';
@@ -293,87 +342,96 @@ body {
         }
 
 
-        .your-name {
-            margin-top: -0.35rem;
-        }
-
-
         .form-btns {
             display: flex;
             justify-content: space-between;
             padding: 1rem 1rem 0;
             margin-bottom: -0.25rem;
 
-            .form-btn {
-                border: none;
-                background-color: var(--brand-500);
-                padding: 0.5rem 1rem;
-                border-radius: 16px;
-
-                font-size: var(--body-text-sm);
-                color: var(--brand-50);
-                transition: 0.2s all;
-
-
-                @media (width > 768px) {
-                    &:hover {
-                        transform: translateY(-4px);
-                        box-shadow: 0.15rem 0.15rem 0.25rem 0.5px rgba(30, 11, 3, 0.2);
-                        transition: 0.2s all;
-                    }
-                }
-
-                &:active {
-                    background-color: var(--brand-200);
-                    transform: translateY(-4px);
-                    transition: 0.2s all;
-                }
+            @media (width > 768px) {
+                grid-column: span 2;
             }
 
             #submit-form::before {
-            font-family: "bootstrap-icons";
-            content: "\F282";
-            position: relative;
-            top: 12.5%;
-            left: -4px;
+                font-family: "bootstrap-icons";
+                content: "\F282";
+                position: relative;
+                top: 12.5%;
+                left: -4px;
             }
 
             #clear-form::after {
-            font-family: "bootstrap-icons";
-            content: "\F286";
-            position: relative;
-            top: 12.5%;
-            right: -4px;
+                font-family: "bootstrap-icons";
+                content: "\F286";
+                position: relative;
+                top: 12.5%;
+                right: -4px;
             }
         }
-        
-        
+
+
         .hidden-label {
             position: absolute;
             color: var(--brand-500);
             font-size: var(--body-text-xs);
             opacity: 0;
-            left: 2rem;
+            left: 2.5rem;
             top: -.6rem;
             transition: 0.2s all;
         }
-       
+
         .form-group.input-detected .hidden-label {
             opacity: 1;
             top: .4rem;
             transition: 0.2s all;
         }
 
-        .form-group.input-detected select, .form-group.input-detected input {
+        .form-group.input-detected select,
+        .form-group.input-detected input {
             padding-top: 1.5rem;
         }
 
         .form-group.input-detected .input-field {
             color: rgba(30, 11, 0, 0.8);
         }
+
+        .error select, .error input{
+            border: 1px solid firebrick;
+            transition: 0.5 all;
+
+        }
+
+        .error .time-not-valid, .error .not-valid {
+            display: block;
+            transition: 0.5 all;
+        }
+
+        .not-valid {
+            display: none;
+            position: absolute;
+            top: 3.5rem;
+            left: 2.6rem;
+            
+            font-size: var(--body-text-sm);
+            color: firebrick;
     
+        }
+    
+        .time-not-valid {
+            display: none;
+            position: absolute;
+            top: 6.75rem;
+            left: 2.55rem;
+            
+            font-size: var(--body-text-sm);
+            color: firebrick;
+        }
     }
-    
+
+
+
+
+
     .form-visible {
         display: flex;
         flex-direction: column;
@@ -386,21 +444,50 @@ body {
 
     .booking-details {
         grid-column: span 7;
-        display: flex;
-        justify-content: space-between;
+        display: none;
 
         .review-booking {
             padding: 1rem;
+            display: flex;
+            flex-direction: column;
+
+            .detail-group {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 0.75rem;
+                @media (width > 425px) {
+                    flex-direction: row;
+                    align-items: center;
+                }
+                justify-content: space-between;
+            }
 
             h2 {
                 font-size: var(--body-text-lg);
                 color: var(--brand-1100);
+                margin-bottom: 1rem;
             }
+
+            p,
+            span {
+                color: var(--brand-1100);
+            }
+
+            #finalize-booking {
+                margin-top: 0.5rem;
+                align-self: flex-end;
+            }
+        }
+
+        .thank-you {
+            color: var(--brand-1100);
+            font-size: var(--body-text-xl);
+            text-align: center;
+            padding: 5rem;
         }
     }
 
-    .details-vibile {
-        display: flex;
-        justify-content: space-between;
+    .details-visible {
+        display: block;
     }
 }

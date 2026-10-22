@@ -56,17 +56,16 @@
 
                 <article class="experience-desc-container card-bg">
                     <p id="experience-desc">Välj din upplevelse!</p>
-                    <a id="desc-btn" href="#games-form">
+                    <a id="desc-btn" class="btn" href="#games-form">
                         Gå vidare till bokning
                     </a>
                 </article>
 
                 <article id="games-form" class="games-form card-bg">
-                    <form id="booking-form" class="booking-flex" method="post">
-
+                    <form id="booking-form" class="booking-flex" method="post" novalidate>
                         <div class="booking-flex">
-                            <div class="form-group">
-                                <select required class="input-field">
+                            <div class="form-group" id="amount-group">
+                                <select class="input-field" id="input-amount">
                                     <option value selected hidden>antal besökare*</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -76,10 +75,11 @@
                                 </select>
                                 <span class="dropdown-arrow"></span>
                                 <span class="hidden-label">Besökare</span>
+                                <p class="not-valid">Error</p>
                             </div>
 
-                            <div class="form-group">
-                                <select required class="input-field">
+                            <div class="form-group" id="duration-group">
+                                <select class="input-field" id="input-duration">
                                     <option value selected hidden>antal timmar*</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -89,42 +89,46 @@
                                 </select>
                                 <span class="dropdown-arrow"></span>
                                 <span class="hidden-label">Timmar</span>
+                                <p class="not-valid">Error</p>
                             </div>
 
-                            <div class="form-group input-detected">
-                                <input type="date" id="booking-date" class="input-field">
+                            <div class="input-date form-group input-detected" id="date-group">
+                                <input type="date" class="input-field" id="input-date">
                                 <span class="hidden-label">Datum*</span>
+                                <p class="not-valid">Error</p>
                             </div>
 
-                            <div class="time-select">
+                            <div class="time-select" id="time-group">
+                                <p class="time-not-valid">Error</p>
                             </div>
                             
-                            <div class="your-name form-group" class="input-field">
-                                <input type="text" placeholder="Ditt namn*" class="input-field" required>
-                                <span class="dropdown-arrow"></span>
+                            <div class="form-group" class="input-field" id="name-group">
+                                <input type="text" placeholder="Ditt första namn*" class="input-field" id="input-name">
                                 <span class="hidden-label">Namn</span>
+                                <p class="not-valid">Error</p>
                             </div>
 
-                            <div class="your-email form-group">
-                                <input type="email" placeholder="Din e-mail*" class="input-field">
-                                <span class="dropdown-arrow"></span>
+                            <div class="form-group" id="email-group">
+                                <input type="email" placeholder="Din e-mail*" class="input-field" id="input-email">
                                 <span class="hidden-label">E-mail</span>
+                                <p class="not-valid">Error</p>
                             </div>
 
                             <div class="form-btns form-group">
-                                <button id="clear-form" class="form-btn">Rensa</button>
-                                <button id="submit-form" type="submit" class="form-btn">Slutför bokning</button>
+                                <button id="clear-form" class="btn">Rensa</button>
+                                <button type="submit" id="submit-form" class="btn">Granska bokning</button>
                             </div>
                         </div>
                     </form>
                 </article>
 
-                <article class="booking-details card-bg">
+                <article class="booking-details card-bg" id="detailsScroll">
                     <div class="review-booking">
                         <h2>GRANSKA DIN BOKNING</h2>
-                        <div class="user-details">
+                        <div class="customer-details">
 
                         </div>
+                        <button id="finalize-booking" class="btn">Boka</button>
                     </div>
                 </article>
             </div>
