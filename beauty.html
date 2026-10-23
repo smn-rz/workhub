@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massagebehandlingar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="beauty.css">
+</head>
+
+<body id="beauty-page">
+    <header>
+        <div id="nav-container">
+            <svg id="workhub" viewBox="0 0 135 20">
+                <use href="images/WorkHub_logo.svg"></use>
+            </svg>
+
+            <button id="menu-button" type="button">
+                <svg id="burger" viewBox="0 0 32 20">
+                    <use href="images/burger.svg"></use>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="nav-menu" aria-label="Huvudmeny" hidden>
+            <a href="index.html">Hem</a>
+            <a href="games.html">Spel</a>
+            <a href="beauty.html">Skönhet</a>
+            <a href="outdoor-adventures.html">Upplevelser</a>
+        </nav>
+    </header>
+
+    <h1>En stund för dig själv</h1>
+    <img src="images/spa-hero.png" alt="Avkopplande spamiljö" class="beauty-hero-img">
+
+    <p class="beauty-intro">Vi erbjuder en mängd massagebehandlingar, skicka din bokningsförfrågan idag!</p>
+    <a href="#treatment-list" class="beauty-btn">Se våra behandlingar</a>
+
+    <section id="treatments">
+        <div id="treatment-list"></div>
+    </section>
+
+    <div class="booking-layout">
+
+        <section class="booking-section">
+            <h2>Din bokning</h2>
+
+            <p id="selected-treatment"></p>
+
+            <label for="booking-quantity">Antal behandlingstillfällen 1–5:</label>
+            <input type="number" id="booking-quantity" min="1" max="5" step="1" placeholder="Välj antal">
+            <p id="quantity-error" class="invalid-input">Ange ett heltal mellan 1 och 5.</p>
+        </section>
+
+        <div class="container">
+            <form id="regForm" class="regForm" novalidate>
+
+                <div class="form-column">
+
+                    <div class="input-group">
+                        <label for="firstName" class="form-label">Förnamn <span class="required"> *</span></label>
+                        <input type="text" id="firstName">
+                        <p class="invalid-input"> Ange ett giltligt förnamn</p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lastName" class="form-label">Efternamn<span class="required"> *</span></label>
+                        <input type="text" id="lastName">
+                        <p class="invalid-input"> Ange ett giltligt efternamn</p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email" class="form-label">E-postadress<span class="required"> *</span></label>
+                        <input type="email" id="email">
+                        <p class="invalid-input">Ogiltig e-postadress</p>
+                    </div>
+
+                    <button id="submit-btn" type="submit" class="beauty-btn">Boka</button>
+
+                    <button type="button" id="clear-booking" class="beauty-btn beauty-btn-secondary">
+                        Börja om
+                    </button>
+
+                    <p class="required-info">* Obligatoriska fält</p>
+                </div>
+
+            </form>
+        </div>
+
+        <div id="booking-popup" class="booking-popup" hidden>
+            <div class="popup-content">
+                <h2>Tack för din bokning!</h2>
+
+                <p id="booking-confirmation"></p>
+
+                <button type="button" id="reset-booking" class="beauty-btn beauty-btn-secondary">
+                    Börja om
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <footer class="home-footer">
+        <p>© 2026 WorkHub</p>
+    </footer>
+    <script src="beauty.js"></script>
+</body>
+
+</html>
