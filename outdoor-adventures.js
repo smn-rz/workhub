@@ -124,6 +124,9 @@ function handleOfferClick(e) {
 
     updateOfferSelection(offerId);
 
+    const invalidChoice = document.querySelector(".invalidChoice");
+    invalidChoice.classList.contains("error") ? isValidOffer() : null;
+
     updateTotalPrice();
 }
 
@@ -147,6 +150,10 @@ function updateTotalPrice() {
 
 function handleAmountChange(e) {
     currentBooking.offerAmount = e.target.value;
+
+    const offerAmount = document.querySelector(".offerAmount");
+    if (offerAmount.classList.contains("error")) isValidAmount();
+
     updateTotalPrice();
 }
 
@@ -155,14 +162,17 @@ function handleAmountCounter(e) {
     const subtractBtn = e.target.closest(".subtract");
     const addBtn = e.target.closest(".add");
 
-    const offerAmount = document.querySelector("#amount");
+    const offerAmountInput = document.querySelector("#amount");
+    const offerAmount = document.querySelector(".offerAmount");
 
     if (subtractBtn) {
-        offerAmount.value--;
+        offerAmountInput.value--;
         currentBooking.offerAmount--;
+        if (offerAmount.classList.contains("error")) isValidAmount();
     } else if (addBtn) {
-        offerAmount.value++;
+        offerAmountInput.value++;
         currentBooking.offerAmount++;
+        if (offerAmount.classList.contains("error")) isValidAmount();
     } else {
         return;
     }
@@ -177,8 +187,12 @@ function handlePersonalDetails(e) {
 
     if (nameInput) {
         currentBooking.userName = nameInput.value;
+        const userName = document.querySelector(".userName");
+        userName.classList.contains("error") ? isValidName() : null;
     } else if (emailInput) {
         currentBooking.userEmail = emailInput.value;
+        const userEmail = document.querySelector(".userEmail");
+        userEmail.classList.contains("error") ? isValidEmail() : null;
     } else {
         return;
     }
@@ -189,6 +203,9 @@ function handleSubmitBooking(e) {
     e.preventDefault();
 
     // TODO: Validation
+    if (!isFormValid()) {
+        return;
+    }
 
     renderBookingConfirmation();
 
@@ -369,4 +386,109 @@ function handleResetBooking() {
 
     // Update total price back to 0 kr
     updateTotalPrice();
+
+    // Reset the invalid form input errors
+    resetFormValidation();
+}
+
+
+function isFormValid() {
+    if (isValidName() & isValidEmail() & isValidOffer() & isValidAmount()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function isValidName() {
+    const name = currentBooking.userName;
+    const userNameContainer = document.querySelector(".userName");
+    const invalidMsg = document.querySelector(".userName .invalidMsg");
+
+    if (!name) {
+        invalidMsg.textContent = "Namn måste vara ifyllt";
+        userNameContainer.classList.add("error");
+        return false;
+    } else if (!name.trim()) {
+        invalidMsg.textContent = "Namn måste innehålla mer än bara blanksteg";
+        userNameContainer.classList.add("error");
+        return false;
+    } else {
+        invalidMsg.textContent = null;
+        userNameContainer.classList.remove("error");
+        return true;
+    }
+}
+
+
+function isValidEmail() {
+    const email = currentBooking.userEmail;   
+    const userEmailContainer = document.querySelector(".userEmail");
+    const invalidMsg = document.querySelector(".userEmail .invalidMsg");
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+        invalidMsg.textContent = "E-postadress måste vara ifyllt";
+        userEmailContainer.classList.add("error");
+        return false;
+    } else if (!regex.test(email)) {
+        invalidMsg.textContent = "E-postadress måste vara giltig adress";
+        userEmailContainer.classList.add("error");
+        return false;
+    } else {
+        invalidMsg.textContent = null;
+        userEmailContainer.classList.remove("error");
+        return true;
+    }
+}
+
+
+function isValidOffer() {
+    const selectedOffer = currentBooking.selectedOffer;
+    const invalidChoiceContainer = document.querySelector(".invalidChoice");
+    const invalidMsg = document.querySelector(".invalidChoice .invalidMsg");
+
+    if (!offersList.find(offer => offer == selectedOffer)) {
+        invalidMsg.textContent = "Ett erbjudande måste väljas";
+        invalidChoiceContainer.classList.add("error");
+        return false;
+    } else {
+        invalidMsg.textContent = null;
+        invalidChoiceContainer.classList.remove("error");
+        return true;
+    }
+}
+
+
+function isValidAmount() {
+    const offerAmount = parseFloat(currentBooking.offerAmount);
+    const offerAmountContainer = document.querySelector(".offerAmount");
+    const invalidMsg = document.querySelector(".offerAmount .invalidMsg");
+
+    if (!Number.isInteger(offerAmount) || offerAmount > 5 || offerAmount < 1) {
+        invalidMsg.textContent = "Antal måste vara ett heltal mellan 1 till 5";
+        offerAmountContainer.classList.add("error");
+        return false;
+    } else {
+        invalidMsg.textContent = null;
+        offerAmountContainer.classList.remove("error");
+        return true;
+    }
+}
+
+
+function resetFormValidation() {
+    // Remove all error classes
+    const errors = document.querySelectorAll(".error");
+    errors.forEach(error => {
+        error.classList.remove("error");
+    });
+
+    // Clear all invalid error text messages
+    const invalidMessages = document.querySelectorAll(".invalidMsg");
+    invalidMessages.forEach(invalidMsg => {
+        invalidMsg.textContent = null;
+    });
 }

@@ -22,7 +22,12 @@
         
                 <fieldset class="offers" form="offerForm">
                     <legend>Välj erbjudande</legend>
-    
+
+                    <div class="invalidChoice">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <p class="invalidMsg"></p>
+                    </div>
+
                     <!-- JavaScript offers -->
                 </fieldset>
             </div>
@@ -31,15 +36,19 @@
                 <h2 class="formHeader">Boka din upplevelse</h2>
     
                 <div class="offerAmount">
-                    <label for="amount">Antal enhet (1-5) *</label>
+                    <label for="amount">Antal personer (1-5) *</label>
                     <div class="counter">
-                        <button class="subtract" type="button">
+                        <button class="btn btn-primary subtract" type="button">
                             <i class="bi bi-dash-lg"></i>
                         </button>
                         <input type="number" name="amount" id="amount" value="1">
-                        <button class="add" type="button">
+                        <button class="btn btn-primary add" type="button">
                             <i class="bi bi-plus-lg"></i>
                         </button>
+                    </div>
+                    <div class="invalidInput">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <p class="invalidMsg"></p>
                     </div>
                 </div>
     
@@ -54,11 +63,19 @@
                     <div class="userName">
                         <label for="name">Namn *</label>
                         <input type="text" name="name" id="name">
+                        <div class="invalidInput">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            <p class="invalidMsg"></p>
+                        </div>
                     </div>
     
                     <div class="userEmail">
                         <label for="email">E-postadress *</label>
                         <input type="email" name="email" id="email">
+                        <div class="invalidInput">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            <p class="invalidMsg"></p>
+                        </div>
                     </div>
                 </fieldset>
     
