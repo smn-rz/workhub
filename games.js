@@ -194,12 +194,12 @@ function validateForm() {
                 case `hasValidTime`: setError(timeSelect, `Du måste välja en tid`)
                 case `hasValidName`: {
                     if (inputName.value.trim() == ``) {
-                        setError(inputName, `Du måste skriva ett namn`)
+                        setError(inputName, `Du måste ange ett namn`)
                     } else {
                         setError(inputName, `Namnet måste vara minst 2 bokstäver`)
                     }
                 }
-                case `hasValidEmail`: setError(inputEmail, `Du måste skriva en giltig e-mailadress`)
+                case `hasValidEmail`: setError(inputEmail, `Du måste ange en giltig e-mailadress`)
             }
         } else if (i[1]) {
             switch (i[0]) {

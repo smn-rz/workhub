@@ -67,7 +67,6 @@ body {
     }
 
     h1 {
-        font-size: 1.5rem;
         margin: 0;
     }
 
@@ -263,7 +262,6 @@ body {
 
         .time-select {
             display: flex;
-            width: 100%;
             position: relative;
             justify-content: space-between;
             margin: 0 1rem 2rem;
