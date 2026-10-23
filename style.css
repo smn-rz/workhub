@@ -55,23 +55,88 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.3;
 }
 
-h1 { font-size: 3.5rem; }
+h1 { font-size: 2rem; }
 
-h2 { font-size: 3rem; }
+h2 { font-size: 1.8rem; }
 
-h3 { font-size: 2.5rem; }
+h3 { font-size: 1.4rem; }
 
-h4 { font-size: 2rem; }
+h4 { font-size: 1.2rem; }
 
-h5 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
 
-h5 { font-size: 1.5rem; }
-
-h6 { font-size: 1rem; }
+h6 { font-size: 1.125rem; }
 
 p {
     color: var(--brand-1100);
     font-size: var(--body-text-md);
     font-weight: 400;
     line-height: 1.5;
+}
+
+header {
+    #nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem 2rem;
+    background-color: var(--brand-50);
+
+    #workhub {
+        width: 150px;
+        height: auto;
+
+        @media (width >=768px) {
+            width: 250px;
+        }
+    }  
+        
+
+    #menu-button {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+        #burger {
+            width: 30px;
+            height: 24px;
+
+            @media (width >=768px) {
+                width: 48px;
+                height: 38.5px;
+            }
+        }
+    }
+}
+
+    #nav-menu {
+    padding: 20px 2rem;
+    background-color: var(--brand-100);
+
+        a {
+            display: block;
+            color: var(--brand-900);
+            text-decoration: none;
+            margin-bottom: 15px;
+
+            &:hover {
+                text-decoration: underline;
+                color: var(--brand-primary);
+            }
+        }
+    }
+}
+
+footer.home-footer {
+    padding: 1rem;
+    margin-top: 2rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }
