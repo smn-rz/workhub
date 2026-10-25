@@ -2,21 +2,21 @@ const offersList = [
     {
         id: 1,
         title: "Kanottur",
-        shortDescription: "Kort beskrivning",
+        shortDescription: "Ett uppskattat äventyr på vattnet för både nybörjare och vana paddlare.",
         price: 200,
         durationMin: 180
     },
     {
         id: 2,
         title: "Klättring",
-        shortDescription: "K0rt beskrivning!!!",
+        shortDescription: "Upptäck höjderna hos oss och klättra fritt utan gränser!",
         price: 450,
         durationMin: 90
     },
     {
         id: 3,
         title: "Mountainbiketur",
-        shortDescription: "Kort beskrivning",
+        shortDescription: "Häng med på en adrenalinfylld mountainbiketur i fantastisk natur.",
         price: 150,
         durationMin: 60
     }
@@ -142,9 +142,12 @@ function updateOfferSelection(offerId) {
 function updateTotalPrice() {
     const price = document.querySelector(".price");
 
-    totalPrice = currentBooking.selectedOffer ? currentBooking.selectedOffer.price * currentBooking.offerAmount : 0;
-
-    price.textContent = `${totalPrice.toLocaleString("sv-SE")} kr`;
+    if (currentBooking.selectedOffer) {
+        const totalPrice = currentBooking.selectedOffer.price * currentBooking.offerAmount;
+        price.textContent = `${totalPrice.toLocaleString("sv-SE")} kr`;
+    } else {
+        price.textContent = "Ett erbjudande behöver väljas";
+    }
 }
 
 
