@@ -17,6 +17,9 @@ const inputDuration = document.querySelector(`#input-duration`)
 const inputName = document.querySelector(`#input-name`)
 const inputEmail = document.querySelector(`#input-email`)
 const finalizeBooking = document.querySelector(`#finalize-booking`)
+const redoBooking = document.querySelector(`#redo-booking`)
+const reviewTitle = document.querySelector(`#review-title`)
+const pageTitle = document.querySelector(`#title`)
 let recheckDetails
 let chosenDate
 let savedTime
@@ -105,37 +108,37 @@ function printTime() {
 function printDetails(storeBooking = {}) {
     customerDetails.innerHTML = `
     <div class="detail-group">
-        <p>SPELUPPLEVELSE</p>
+        <p>Spelupplevelse</p>
         <span id="chosen-exp">${storeBooking.chosenExp}</span>
     </div>
-
+    <hr>
     <div class="detail-group">
-        <p>DATUM</p>
+        <p>Datum</p>
         <span id="booking-date">${convertDate(storeBooking.chosenDate)} ${addKl(storeBooking.chosenTime)}</span>
     </div>
-
+    <hr>
     <div class="detail-group">
-        <p>BESÖKARE</p>
-        <span id="booking-amount">${storeBooking.expAmount} st</span>
+        <p>Besökare</p>
+        <span id="booking-amount">${storeBooking.expAmount} styck</span>
     </div>
-
+    <hr>
     <div class="detail-group">
-        <p>TIMMAR</p>
-        <span id="booking-duration">${storeBooking.expDuration} tim</span>
+        <p>Timmar</p>
+        <span id="booking-duration">${storeBooking.expDuration} timmar</span>
     </div>
-
+    <hr>
     <div class="detail-group">
-        <p>NAMN</p>
+        <p>Namn</p>
         <span id="booking-name">${storeBooking.customerName}</span>
     </div>
-
+    <hr>
     <div class="detail-group">
-        <p>E-MAIL</p>
+        <p>E-mail</p>
         <span id="booking-email">${storeBooking.customerEmail}</span>
     </div>  
-    
+    <hr>
     <div class="detail-group">
-        <p>TOTALT</p>
+        <p>Totalpris</p>
         <span>${addKr(storeBooking.expCost)}
     `
 }
@@ -190,7 +193,12 @@ function validateForm() {
             switch (i[0]) {
                 case `hasAmount`: setError(inputAmount, `Du måste välja antal besökare`)
                 case `hasDuration`: setError(inputDuration, `Du måste välja antal timmar`)
-                case `hasValidDate`: setError(inputDate, `Du måste välja ett giltigt datum`)
+                case `hasValidDate`: 
+                    if (isDatePast()) {
+                        setError(inputDate, `Du kan inte välja ett föregående datum`)
+                    } else {
+                        setError(inputDate, `Du måste välja ett giltigt datum`)
+                    }
                 case `hasValidTime`: setError(timeSelect, `Du måste välja en tid`)
                 case `hasValidName`: {
                     if (inputName.value.trim() == ``) {
@@ -232,8 +240,8 @@ function extractCustomerDetails() {
     storeBooking = {
         expAmount : inputAmount.value,
         expDuration : inputDuration.value,
-        customerName : inputName.value.toUpperCase(),
-        customerEmail : inputEmail.value.toUpperCase(),
+        customerName : inputName.value.charAt(0).toUpperCase() + inputName.value.slice(1).toLowerCase(),
+        customerEmail : inputEmail.value.charAt(0).toUpperCase() + inputEmail.value.slice(1).toLowerCase(),
         chosenDate : convertDate(),
         chosenTime : checkSelectedTime().textContent,
         chosenExp : checkSelectedExp().eTitle,
@@ -249,9 +257,9 @@ function convertDate() {
         const day = chosenDate.getDate()
         const month = chosenDate.toLocaleDateString(`default`, { month: `long` })
         if ([1, 2, 21, 22, 31].includes(day)) {
-            return "DEN " + day + ":a " + month.toUpperCase()
+            return "Den " + day + ":a " + month
         } else {
-            return "DEN " + day + ":e " + month.toUpperCase() + ""
+            return "Den " + day + ":e " + month + ""
         }
     }
 }
@@ -281,7 +289,7 @@ function calcCost(amount, duration) {
     const hourPrice = checkSelectedExp().eHourPrice
     const finalPrice = hourPrice * Number(amount) + hourPrice * Number(duration)
 
-    if (finalPrice == NaN || finalPrice == null ||finalPrice == undefined) {
+    if (finalPrice == NaN || finalPrice == null || finalPrice == undefined) {
         return `Kunde inte räkna ut totalpriset! Prova igen.`
     } else {
         return finalPrice
@@ -289,13 +297,28 @@ function calcCost(amount, duration) {
 }
 
 
-// function saveSelectedTime(selected) {
-//     savedTime = selected
-// }
-
-
-function resetForm() {
+function resetForm(event) {
+    event.preventDefault()
     bookingForm.reset()
+    recheckDetails = false
+    if (bookingDetails.classList.contains(`details-visible`)) {
+        bookingDetails.classList.remove(`details-visible`)
+    }
+    let formGroup = document.querySelectorAll(`.form-group`)
+    formGroup.forEach(input => {
+        console.log(input.type)
+        if (input.classList.contains(`input-detected`) && !input.classList.contains(`input-date`))
+            input.classList.toggle(`input-detected`)
+    })
+    for (const time of timeSelect.children) {
+        if (time.ariaPressed === `true`) time.ariaPressed = `false`
+    }
+    for (const error of bookingForm.querySelector(`.booking-flex`).children) {
+        if (error.classList.contains(`error`)) {
+            error.classList.remove(`error`)
+        }
+    }
+    
 }
 
 
@@ -364,8 +387,9 @@ descBtn.addEventListener(`click`, event => {
 })
 
 
-inputDate.addEventListener(`click`, () => {
-    inputDate.showPicker()
+inputDate.addEventListener(`pointerup`, (event) => {
+    if (event.pointerType === "mouse") inputDate.showPicker()
+    else return
 })
 
 
@@ -389,20 +413,7 @@ timeSelect.addEventListener(`click`, event => {
 
 clearForm.addEventListener(`click`, event => {
     event.preventDefault()
-    resetForm()
-    recheckDetails = false
-    if (bookingDetails.classList.contains(`details-visible`)) {
-        bookingDetails.classList.remove(`details-visible`)
-    }
-    let formGroup = document.querySelectorAll(`.form-group`)
-    formGroup.forEach(input => {
-        console.log(input.type)
-        if (input.classList.contains(`input-detected`) && !input.classList.contains(`input-date`))
-            input.classList.toggle(`input-detected`)
-    })
-    for (const time of timeSelect.children) {
-        if (time.ariaPressed === `true`) time.ariaPressed = `false`
-    }
+    resetForm(event)
 })
 
 
@@ -421,16 +432,28 @@ bookingForm.addEventListener(`submit`, event => {
 
 
 finalizeBooking.addEventListener(`click`, event => {
-    bookingDetails.querySelector(`.review-booking`).innerHTML = `
-    <div class="thank-you">Tack, vi ses då!</div>
-    `
+    reviewTitle.textContent = `Tack för din bokning, vi ses ${convertDate(storeBooking.chosenDate)}!`
+    reviewTitle.classList.add(`thank-you`)
+
     FormContainer.classList.remove(`form-visible`)
     expDescContainer.classList.remove(`desc-visible`)
-    expContainer.innerHTML = ``
+    expContainer.classList.add(`hidden`)
+    pageTitle.classList.add(`hidden`)
+    finalizeBooking.classList.add(`hidden`)
+    redoBooking.classList.remove(`hidden`)
+})
+
+redoBooking.addEventListener(`click`, event => {
+    expContainer.classList.remove(`hidden`)
+    pageTitle.classList.remove(`hidden`)
+    resetForm(event)
+    reviewTitle.textContent = `Granska din bokning`
+    reviewTitle.classList.remove(`thank-you`)
+    finalizeBooking.classList.remove(`hidden`)
+    redoBooking.classList.add(`hidden`)
 })
 
 
 printExperience()
 printTime()
 printDetails()
-

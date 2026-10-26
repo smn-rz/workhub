@@ -39,10 +39,10 @@
             <div class="grid-container booking-container">
                 <div id="title">
                     <h1>VÄLJ DIN SPELUPPLEVELSE</h1>
-                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>Vi har spel för både barn och vuxna, lite för alla!</p>
                 </div>
 
-                <article id="experiences-card" class="grid-container">
+                <article id="experiences-card" class="exp-container">
                     <button type="button" aria-pressed="false" class="experience" id="${expList.eId}">
                         <h2>
                             ${expList.eTitle}
@@ -62,7 +62,7 @@
                 </article>
 
                 <article id="games-form" class="games-form card-bg">
-                    <form id="booking-form" class="booking-flex" method="post" novalidate>
+                    <form id="booking-form" method="post" novalidate>
                         <div class="booking-flex">
                             <div class="form-group" id="amount-group">
                                 <select class="input-field" id="input-amount">
@@ -122,13 +122,14 @@
                     </form>
                 </article>
 
-                <article class="booking-details card-bg" id="detailsScroll">
+                <article class="booking-details card-bg" id="">
                     <div class="review-booking">
-                        <h2>GRANSKA DIN BOKNING</h2>
-                        <div class="customer-details">
+                        <h2 id="review-title">Granska din bokning</h2>
+                        <div class="customer-details"></div>
+                        <button id="finalize-booking" class="btn">Slutför bokning</button>
 
-                        </div>
-                        <button id="finalize-booking" class="btn">Boka</button>
+                        <button id="redo-booking" class="btn hidden">Börja Om</button>
+
                     </div>
                 </article>
             </div>

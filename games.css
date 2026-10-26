@@ -6,7 +6,7 @@ html {
 }
 
 body {
-    background: conic-gradient(from 90deg at 1px 1px, rgb(255, 230, 214) 25%, rgba(20, 20, 20, 0.025) 0) 0 0/40px 40px, rgb(255, 230, 214);
+    background: conic-gradient(from 90deg at 1px 1px, rgb(255, 247, 241) 25%, rgba(20, 20, 20, 0.025) 0) 0 0/40px 40px, rgb(255, 247, 241);
 }
 
 #nav-container {
@@ -46,7 +46,6 @@ body {
 
 .centerizer {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     margin: 0 auto 0;
 }
@@ -55,6 +54,9 @@ body {
     position: relative;
     top: 0;
     grid-column: span 7;
+    @media (width > 768px) {
+        grid-column: 2 / span 5;
+    }
 
     margin: 1rem 0 1rem;
 
@@ -71,7 +73,7 @@ body {
     }
 
     p {
-        font-size: var(--body-text-xs);
+        font-size: var(--body-text-md);
         opacity: 75%;
     }
 }
@@ -132,12 +134,21 @@ body {
 .booking-container {
     user-select: none;
 
+    .exp-container {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        width: 100%;
+        max-width: 1400px;
+    }
+
     #experiences-card {
-        grid-column: span 7;
+        grid-column: 1 / span 7;
         @media (width > 768px) {
             display: flex;
+            grid-column: 2 / span 5;
             gap: 2rem;
         }
+        
 
         .experience {
             grid-column: span 7;
@@ -145,10 +156,8 @@ body {
             transform: skew(-5deg);
             margin-bottom: 1.5rem;
             padding: 1rem;
-
             @media (width > 768px) {
-                transform: skew(0deg);
-                width: 50%;
+                width: 70%;
             }
 
             h2 {
@@ -174,6 +183,7 @@ body {
 
             &[aria-pressed="true"] {
                 width: 100%;
+                border: 1px solid var(--brand-500);
 
                 &::before {
                     width: 120%;
@@ -194,6 +204,9 @@ body {
 
     .experience-desc-container {
         grid-column: span 7;
+        @media (width > 768px) {
+            grid-column: 2 / span 5;
+            }
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -233,6 +246,9 @@ body {
 
     .games-form {
         grid-column: span 7;
+        @media (width > 768px) {
+            grid-column: 2 / span 5;
+            }
         padding: 1rem 0;
         display: none;
 
@@ -408,7 +424,7 @@ body {
             display: none;
             position: absolute;
             top: 3.5rem;
-            left: 2.6rem;
+            left: 2rem;
             
             font-size: var(--body-text-sm);
             color: firebrick;
@@ -419,10 +435,18 @@ body {
             display: none;
             position: absolute;
             top: 6.75rem;
-            left: 2.55rem;
+            left: 1.1rem;
             
             font-size: var(--body-text-sm);
             color: firebrick;
+        }
+
+        .not-valid::before, .time-not-valid::before {
+            font-family: "bootstrap-icons";
+            content: "\F332";
+            margin-right: .3rem;
+            position: relative;
+            top: .1rem;
         }
     }
 
@@ -442,18 +466,22 @@ body {
 
     .booking-details {
         grid-column: span 7;
+        @media (width > 768px) {
+            grid-column: 2 / span 5;
+            }
         display: none;
 
         .review-booking {
-            padding: 1rem;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
 
             .detail-group {
+                padding: 0 3rem;
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 0.75rem;
-                @media (width > 425px) {
+                margin: 0.5rem 0;
+                @media (width > 768px) {
                     flex-direction: row;
                     align-items: center;
                 }
@@ -474,18 +502,56 @@ body {
             #finalize-booking {
                 margin-top: 0.5rem;
                 align-self: flex-end;
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+                &::after {
+                    font-family: "bootstrap-icons";
+                    content: '\F285';
+                    
+                }
+            }
+
+            #redo-booking {
+                margin-top: 0.5rem;
+                align-self: flex-end;
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+                &::before {
+                    font-family: "bootstrap-icons";
+                    content: '\F284';
+                    
+                }
             }
         }
 
         .thank-you {
             color: var(--brand-1100);
             font-size: var(--body-text-xl);
-            text-align: center;
-            padding: 5rem;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                font-family: "bootstrap-icons";
+                content: '\F26A';
+                font-size: 2rem;
+                color: var(--brand-500);
+                position: relative;
+                right: 0.5rem;
+            }
         }
     }
 
     .details-visible {
         display: block;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    hr {
+        border-top: 1px solid var(--brand-500);
     }
 }
