@@ -111,7 +111,7 @@ function validateTextInput(input) {
 
 
 function validateEmail(input) {
-    const email = input.value.trim();
+    const email = input.value;
 
     const parts = email.split("@");
 
