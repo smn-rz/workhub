@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="outdoor-adventures.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <script src="outdoor-adventures.js" defer></script>
+    <title>Friluftsäventyr</title>
+</head>
+<body onload="main();">
+    <header>
+        <div id="nav-container">
+            <svg id="workhub" viewBox="0 0 135 20">
+                <use href="images/WorkHub_logo.svg"></use>
+            </svg>
+
+            <button id="menu-button" type="button">
+                <svg id="burger" viewBox="0 0 32 20">
+                    <use href="images/burger.svg"></use>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="nav-menu" aria-label="Huvudmeny" hidden>
+            <a href="index.html">Hem</a>
+            <a href="games.html">Spel</a>
+            <a href="beauty.html">Massage</a>
+            <a href="outdoor-adventures.html">Friluftsäventyr</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="booking" class="grid-12-cols">
+            <div class="content">
+                <img class="featuredImg" src="/images/mountainbike-group.jpg" alt="Flera personer som cyklar med mountainbikes i naturen.">
+
+                <h1>Frilufts&shy;äventyr</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea vel velit exercitationem iure veritatis quibusdam soluta. Nemo dolor sed aperiam, eius libero pariatur ipsam provident!</p>
+        
+                <fieldset class="offers" form="offerForm">
+                    <legend>Välj erbjudande</legend>
+
+                    <div class="invalidChoice">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <p class="invalidMsg"></p>
+                    </div>
+
+                    <!-- JavaScript offers -->
+                </fieldset>
+            </div>
+    
+            <form id="offerForm" action="" method="" novalidate>
+                <h2 class="formHeader">Boka din upplevelse</h2>
+    
+                <div class="offerAmount">
+                    <label for="amount">Antal personer (1-5) *</label>
+                    <div class="counter">
+                        <button class="btn btn-primary subtract" type="button">
+                            <i class="bi bi-dash-lg"></i>
+                        </button>
+                        <input type="number" name="amount" id="amount" value="1">
+                        <button class="btn btn-primary add" type="button">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
+                    </div>
+                    <div class="invalidInput">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <p class="invalidMsg"></p>
+                    </div>
+                </div>
+    
+                <div class="totalPrice">
+                    <p>Totalpris</p>
+                    <p class="price">Ett erbjudande behöver väljas</p>
+                </div>
+    
+                <fieldset class="personalDetails">
+                    <legend>Dina uppgifter</legend>
+    
+                    <div class="userName">
+                        <label for="name">Namn *</label>
+                        <input type="text" name="name" id="name">
+                        <div class="invalidInput">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            <p class="invalidMsg"></p>
+                        </div>
+                    </div>
+    
+                    <div class="userEmail">
+                        <label for="email">E-postadress *</label>
+                        <input type="email" name="email" id="email">
+                        <div class="invalidInput">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            <p class="invalidMsg"></p>
+                        </div>
+                    </div>
+                </fieldset>
+    
+                <div class="buttons">
+                    <button id="submitBooking" type="submit" class="btn btn-primary">Boka</button>
+                    <button id="resetBooking" type="reset" class="btn btn-secondary">Börja om</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="home-footer">
+        <p>© 2026 WorkHub</p>
+    </footer>
+
+    <script>
+        const menuButton = document.querySelector("#menu-button");
+        const navMenu = document.querySelector("#nav-menu");
+
+        menuButton.addEventListener("click", () => {
+            navMenu.hidden = !navMenu.hidden;
+        });
+    </script>
+</body>
+</html>
