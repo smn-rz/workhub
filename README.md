@@ -21,11 +21,13 @@ Tema: Upplevelser
     PC Café
     
     Arkad
-    
 
-#### Sam
-  
-  
+
+|Ansvarig person|Område        |Erbjudanden                            |Antal avser|
+|---            |---           |    ---                                |    ---    |
+|Sam            |Friluftäventyr|Kanottur, klättring och mountainbiketur|Personer   |
+
+
 #### Sandra
 
   Skönhet

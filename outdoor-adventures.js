@@ -3,22 +3,22 @@ const offersList = [
         id: 1,
         title: "Kanottur",
         shortDescription: "Ett uppskattat äventyr på vattnet för både nybörjare och vana paddlare.",
-        price: 200,
+        price: 350,
         durationMin: 180
     },
     {
         id: 2,
         title: "Klättring",
         shortDescription: "Upptäck höjderna hos oss och klättra fritt utan gränser!",
-        price: 450,
-        durationMin: 90
+        price: 150,
+        durationMin: 60
     },
     {
         id: 3,
         title: "Mountainbiketur",
         shortDescription: "Häng med på en adrenalinfylld mountainbiketur i fantastisk natur.",
-        price: 150,
-        durationMin: 60
+        price: 300,
+        durationMin: 90
     }
 ]
 
