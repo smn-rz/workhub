@@ -14,18 +14,23 @@
 <body>
     <header>
         <div id="nav-container">
-            <a href="#">
-                <svg id="workhub" viewbox="0 0 135 20">
-                    <use href="images/WorkHub_logo.svg"></use>
-                </svg>
-            </a>
+            <svg id="workhub" viewBox="0 0 135 20">
+                <use href="images/WorkHub_logo.svg"></use>
+            </svg>
 
-            <div>
-                <svg id="burger" viewbox="0 0 32 20">
+            <button id="menu-button" type="button">
+                <svg id="burger" viewBox="0 0 32 20">
                     <use href="images/burger.svg"></use>
                 </svg>
-            </div>
+            </button>
         </div>
+
+        <nav id="nav-menu" aria-label="Huvudmeny" hidden>
+            <a href="index.html">Hem</a>
+            <a href="games.html">Spelupplevelser</a>
+            <a href="beauty.html">Massage</a>
+            <a href="outdoor-adventures.html">Friluftsäventyr</a>
+        </nav>
     </header>
 
     <main>
@@ -101,7 +106,7 @@
                             <div class="time-select" id="time-group">
                                 <p class="time-not-valid">Error</p>
                             </div>
-                            
+
                             <div class="form-group" class="input-field" id="name-group">
                                 <input type="text" placeholder="Ditt första namn*" class="input-field" id="input-name">
                                 <span class="hidden-label">Namn</span>
@@ -136,4 +141,13 @@
 
         </section>
     </main>
+
+    <script>
+        const menuButton = document.querySelector("#menu-button");
+        const navMenu = document.querySelector("#nav-menu");
+
+        menuButton.addEventListener("click", () => {
+            navMenu.hidden = !navMenu.hidden;
+        });
+    </script>
 </body>

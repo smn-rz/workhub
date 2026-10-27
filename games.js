@@ -25,12 +25,12 @@ let chosenDate
 let savedTime
 let chosenExp
 let formValidation = {
-    hasAmount : false,
-    hasDuration : false,
-    hasValidDate : false,
-    hasValidTime : false,
-    hasValidName : false,
-    hasValidEmail : false
+    hasAmount: false,
+    hasDuration: false,
+    hasValidDate: false,
+    hasValidTime: false,
+    hasValidName: false,
+    hasValidEmail: false
 }
 
 const expList = [
@@ -152,7 +152,7 @@ function setError(input, text) {
     } else {
         const parent = input.parentElement
         parent.classList.add(`error`)
-    
+
         const errorText = parent.querySelector(`.not-valid`)
         errorText.innerText = text
     }
@@ -168,32 +168,13 @@ function removeError(input) {
     }
 }
 
-
-function validateForm() {
-    const amountPCL = inputAmount.parentElement.classList
-    const durationPCL = inputDuration.parentElement.classList
-    const validPattern = /^[A-Za-z0-9._+'!=#$&*-]{2,}@[A-Za-z0-9-]+\.[A-Za-z]{1,}\.?[A-Za-z]*[^\.]+[A-Za-z]*$/
-
-    formValidation.hasAmount = (amountPCL.contains(`input-detected`)) ? true:false
-
-    formValidation.hasDuration = (durationPCL.contains(`input-detected`)) ? true:false
-
-    formValidation.hasValidDate = (inputDate.value && isDatePast() === false) ? true:false
-
-    formValidation.hasValidTime = (checkSelectedTime()) ? true:false
-
-    formValidation.hasValidName = (inputName.value.trim() !== `` && inputName.value.length >= 2) ? true:false
-
-    formValidation.hasValidEmail = validPattern.test(inputEmail.value)
-    
-    const isValid = Object.values(formValidation).every(i => i)
-
+function passOutError(formValidation) {
     Object.entries(formValidation).forEach(i => {
         if (!i[1]) {
             switch (i[0]) {
                 case `hasAmount`: setError(inputAmount, `Du måste välja antal besökare`)
                 case `hasDuration`: setError(inputDuration, `Du måste välja antal timmar`)
-                case `hasValidDate`: 
+                case `hasValidDate`:
                     if (isDatePast()) {
                         setError(inputDate, `Du kan inte välja ett föregående datum`)
                     } else {
@@ -220,6 +201,29 @@ function validateForm() {
             }
         }
     })
+}
+
+
+function validateForm() {
+    const amountPCL = inputAmount.parentElement.classList
+    const durationPCL = inputDuration.parentElement.classList
+    const validPattern = /^[A-Za-z0-9._+'!=#$&*-]{2,}@[A-Za-z0-9-]+\.[A-Za-z]{1,}\.?[A-Za-z]*[^\.]+[A-Za-z]*$/
+
+    formValidation.hasAmount = (amountPCL.contains(`input-detected`)) ? true : false
+
+    formValidation.hasDuration = (durationPCL.contains(`input-detected`)) ? true : false
+
+    formValidation.hasValidDate = (inputDate.value && isDatePast() === false) ? true : false
+
+    formValidation.hasValidTime = (checkSelectedTime()) ? true : false
+
+    formValidation.hasValidName = (inputName.value.trim() !== `` && inputName.value.length >= 2) ? true : false
+
+    formValidation.hasValidEmail = validPattern.test(inputEmail.value)
+
+    const isValid = Object.values(formValidation).every(i => i)
+
+    passOutError(formValidation)
 
     return isValid
 }
@@ -238,14 +242,14 @@ function isDatePast() {
 
 function extractCustomerDetails() {
     storeBooking = {
-        expAmount : inputAmount.value,
-        expDuration : inputDuration.value,
-        customerName : inputName.value.charAt(0).toUpperCase() + inputName.value.slice(1).toLowerCase(),
-        customerEmail : inputEmail.value.charAt(0).toUpperCase() + inputEmail.value.slice(1).toLowerCase(),
-        chosenDate : convertDate(),
-        chosenTime : checkSelectedTime().textContent,
-        chosenExp : checkSelectedExp().eTitle,
-        expCost : calcCost(inputAmount.value, inputDuration.value)
+        expAmount: inputAmount.value,
+        expDuration: inputDuration.value,
+        customerName: inputName.value.charAt(0).toUpperCase() + inputName.value.slice(1).toLowerCase(),
+        customerEmail: inputEmail.value.charAt(0).toUpperCase() + inputEmail.value.slice(1).toLowerCase(),
+        chosenDate: convertDate(),
+        chosenTime: checkSelectedTime().textContent,
+        chosenExp: checkSelectedExp().eTitle,
+        expCost: calcCost(inputAmount.value, inputDuration.value)
     }
     if (storeBooking) return storeBooking
 }
@@ -318,7 +322,7 @@ function resetForm(event) {
             error.classList.remove(`error`)
         }
     }
-    
+
 }
 
 
@@ -333,7 +337,7 @@ function toggleAriaPressed(event) {
                 let storeBooking = extractCustomerDetails()
                 printDetails(storeBooking)
             }
-            
+
             switch (experiences.id) {
                 case `vr`:
                     expDesc.textContent = expList[0].eDescription
@@ -368,7 +372,7 @@ inputField.forEach(input => {
             let storeBooking = extractCustomerDetails()
             printDetails(storeBooking)
         }
-        
+
     })
     input.addEventListener(`change`, () => {
         formGroup.classList.toggle(`input-detected`, !!input.value)
@@ -400,9 +404,9 @@ timeSelect.addEventListener(`click`, event => {
         if (selected === time) {
             time.ariaPressed = `true`
             if (recheckDetails && validateForm()) {
-            let storeBooking = extractCustomerDetails()
-            printDetails(storeBooking)
-        }
+                let storeBooking = extractCustomerDetails()
+                printDetails(storeBooking)
+            }
         }
         else if (selected != null) {
             time.ariaPressed = `false`
