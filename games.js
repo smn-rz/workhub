@@ -87,21 +87,21 @@ function printExperience() {
 
 function printTime() {
     timeSelect.innerHTML +=
-        `<span class="time" aria-pressed="false">10:00</span>
-    <span class="time" aria-pressed="false">10:30</span>
-    <span class="time" aria-pressed="false">11:00</span>
-    <span class="time" aria-pressed="false">11:30</span>
-    <span class="time" aria-pressed="false">12:00</span>
-    <span class="time" aria-pressed="false">12:30</span>
-    <span class="time" aria-pressed="false">13:00</span>
-    <span class="time" aria-pressed="false">13:30</span>
-    <span class="time" aria-pressed="false">14:00</span>
-    <span class="time" aria-pressed="false">14:30</span>
-    <span class="time" aria-pressed="false">15:00</span>
-    <span class="time" aria-pressed="false">15:30</span>
-    <span class="time" aria-pressed="false">16:00</span>
-    <span class="time" aria-pressed="false">16:30</span>
-    <span class="time" aria-pressed="false">17:00</span>`
+        `<button type="button" class="time" aria-pressed="false" tabindex="0">10:00</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">10:30</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">11:00</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">11:30</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">12:00</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">12:30</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">13:00</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">13:30</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">14:00</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">14:30</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">15:00</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">15:30</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">16:00</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">16:30</button>
+    <button type="button" class="time" aria-pressed="false" tabindex="0">17:00</button>`
 }
 
 
@@ -176,7 +176,7 @@ function passOutError(formValidation) {
                 case `hasDuration`: setError(inputDuration, `Du måste välja antal timmar`)
                 case `hasValidDate`:
                     if (isDatePast()) {
-                        setError(inputDate, `Du kan inte välja ett föregående datum`)
+                        setError(inputDate, `Du kan inte välja dagens eller ett föregående datum`)
                     } else {
                         setError(inputDate, `Du måste välja ett giltigt datum`)
                     }
@@ -399,6 +399,7 @@ inputDate.addEventListener(`pointerup`, (event) => {
 
 timeSelect.addEventListener(`click`, event => {
     const selected = event.target.closest(`.time`)
+    selected.preventDefault
     // if (selected) saveSelectedTime(selected.textContent)
     for (const time of timeSelect.children) {
         if (selected === time) {
@@ -455,6 +456,9 @@ redoBooking.addEventListener(`click`, event => {
     reviewTitle.classList.remove(`thank-you`)
     finalizeBooking.classList.remove(`hidden`)
     redoBooking.classList.add(`hidden`)
+    for (const experiences of expContainer.children) {
+        experiences.ariaPressed = `false`
+    }
 })
 
 
