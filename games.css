@@ -269,6 +269,7 @@ body {
             font-size: 0.65rem;
             padding: 0.5rem 1rem;
             margin-bottom: 0.35rem;
+            border: none;
 
             &[aria-pressed="true"] {
                 background-color: var(--brand-500);
