@@ -1,7 +1,7 @@
 
 "use strict";
 
-
+// Hämtar HTML-element
 const treatmentList = document.querySelector("#treatment-list");
 const selectedTreatment = document.querySelector("#selected-treatment");
 const bookingQuantity = document.querySelector("#booking-quantity");
@@ -17,7 +17,7 @@ const emailInput = document.querySelector("#email");
 const resetButton = document.querySelector("#reset-booking");
 const clearButton = document.querySelector("#clear-booking");
 
-
+// Behandlingar
 const treatments = [
     {
         id: "facial-massage",
@@ -47,11 +47,10 @@ const treatments = [
 
 let selectedMassage = null;
 
-
+// Pris och behandlingskort
 function calculatePrice(price, quantity) {
     return price * quantity;
 }
-
 
 function createOfferCard(treatment) {
     return `
@@ -83,9 +82,7 @@ function createOfferCard(treatment) {
     `;
 }
 
-
-
-
+// Validering
 function isValidQuantity() {
     const quantity = Number(bookingQuantity.value);
 
@@ -109,10 +106,8 @@ function validateTextInput(input) {
     }
 }
 
-
 function validateEmail(input) {
     const email = input.value;
-
     const parts = email.split("@");
 
     if (
@@ -136,7 +131,6 @@ function validateEmail(input) {
     }
 }
 
-
 function validateTreatment() {
     if (selectedMassage === null) {
         selectedTreatment.textContent = "Du måste välja en behandling.";
@@ -146,7 +140,6 @@ function validateTreatment() {
         return true;
     }
 }
-
 
 function validateQuantity() {
     if (!isValidQuantity()) {
@@ -160,17 +153,15 @@ function validateQuantity() {
     }
 }
 
-
+// Uppdaterar bokningssammanfattningen
 function updateBooking() {
     selectedTreatment.classList.remove("error-message");
-
 
     if (selectedMassage === null) {
         selectedTreatment.textContent =
             "Välj en behandling för att se totalpriset.";
         return;
     }
-
 
     if (!isValidQuantity()) {
         selectedTreatment.textContent =
@@ -181,25 +172,17 @@ function updateBooking() {
     const quantity = Number(bookingQuantity.value);
     const totalPrice = calculatePrice(selectedMassage.price, quantity);
 
-
     selectedTreatment.textContent =
         selectedMassage.name + ": " +
         quantity + " tillfällen. Totalt: " +
         totalPrice + " kr";
 }
 
-
+// Återställer bokningen
 function resetBooking() {
-
-
     bookingPopup.hidden = true;
-
-
     bookingConfirmation.textContent = "";
-
-
     quantityError.style.display = "none";
-
 
     regForm.querySelectorAll("input, button").forEach(element => {
         element.disabled = false;
@@ -211,7 +194,6 @@ function resetBooking() {
         button.disabled = false;
     });
 
-
     regForm.reset();
 
     document.querySelectorAll(".error").forEach(input => {
@@ -222,38 +204,30 @@ function resetBooking() {
     selectedMassage = null;
     updateBooking();
 
-
     document.querySelectorAll(".treatment-card").forEach(card => {
         card.classList.remove("selected");
         card.querySelector(".beauty-btn").textContent = "Välj behandling";
     });
 }
 
+// Skapar behandlingskort och hanterar användarens val
 treatmentList.innerHTML = treatments.map(createOfferCard).join("");
-
 
 const buttons = document.querySelectorAll(".treatment-card .beauty-btn");
 const accordionButtons = document.querySelectorAll(".accordion-btn");
 
-
-
 buttons.forEach(button => {
     button.addEventListener("click", () => {
-
-
         const treatment = treatments.find(
             massage => massage.id === button.dataset.id
         );
 
-
         selectedMassage = treatment;
-
 
         document.querySelectorAll(".treatment-card").forEach(card => {
             card.classList.remove("selected");
             card.querySelector(".beauty-btn").textContent = "Välj behandling";
         });
-
 
         button.parentElement.classList.add("selected");
         button.textContent = "Vald behandling";
@@ -265,7 +239,6 @@ buttons.forEach(button => {
 bookingQuantity.addEventListener("input", () => {
     updateBooking();
 
-
     if (bookingQuantity.classList.contains("error")) {
         validateQuantity();
     }
@@ -273,9 +246,7 @@ bookingQuantity.addEventListener("input", () => {
 
 accordionButtons.forEach(button => {
     button.addEventListener("click", () => {
-
         const parent = button.parentElement;
-
 
         if (parent.classList.contains("open")) {
             parent.classList.remove("open");
@@ -283,19 +254,16 @@ accordionButtons.forEach(button => {
             return;
         }
 
-
         document.querySelectorAll(".treatment-card").forEach(card => {
             card.classList.remove("open");
             card.querySelector(".accordion-btn")
                 .setAttribute("aria-expanded", "false");
         });
 
-
         parent.classList.add("open");
         button.setAttribute("aria-expanded", "true");
     });
 });
-
 
 firstNameInput.addEventListener("input", () => {
     if (firstNameInput.classList.contains("error")) {
@@ -303,13 +271,11 @@ firstNameInput.addEventListener("input", () => {
     }
 });
 
-
 lastNameInput.addEventListener("input", () => {
     if (lastNameInput.classList.contains("error")) {
         validateTextInput(lastNameInput);
     }
 });
-
 
 emailInput.addEventListener("input", () => {
     if (emailInput.classList.contains("error")) {
@@ -317,11 +283,9 @@ emailInput.addEventListener("input", () => {
     }
 });
 
+// Kontrollerar och bekräftar bokningen
 regForm.addEventListener("submit", e => {
-
-
     e.preventDefault();
-
 
     const firstNameValid = validateTextInput(firstNameInput);
     const lastNameValid = validateTextInput(lastNameInput);
@@ -339,7 +303,6 @@ regForm.addEventListener("submit", e => {
         return;
     }
 
-
     const user = {
         firstName: firstNameInput.value,
         lastName: lastNameInput.value,
@@ -348,7 +311,6 @@ regForm.addEventListener("submit", e => {
 
     const quantity = Number(bookingQuantity.value);
     const totalPrice = calculatePrice(selectedMassage.price, quantity);
-
 
     bookingConfirmation.textContent =
         `Tack ${user.firstName} ${user.lastName}!
@@ -359,7 +321,6 @@ regForm.addEventListener("submit", e => {
         Totalt pris: ${totalPrice} kr
         E-post: ${user.email}`;
 
-
     bookingPopup.hidden = false;
 
     regForm.querySelectorAll("input, button").forEach(element => {
@@ -368,22 +329,17 @@ regForm.addEventListener("submit", e => {
 
     bookingQuantity.disabled = true;
 
-
     buttons.forEach(button => {
         button.disabled = true;
     });
 });
 
 resetButton.addEventListener("click", resetBooking);
-
-
 clearButton.addEventListener("click", resetBooking);
-
 
 updateBooking();
 
-
-
+// Navigationsmeny
 const menuButton = document.querySelector("#menu-button");
 const navMenu = document.querySelector("#nav-menu");
 
